@@ -16,7 +16,6 @@ import {
   BedDouble,
   Bath,
   Tv,
-  Heater,
   Phone,
   Mail,
   MessageCircle,
@@ -24,6 +23,12 @@ import {
   ArrowRight,
   Menu,
   X,
+  Users,
+  Home,
+  Mountain,
+  CalendarCheck,
+  Droplets,
+  Shirt,
 } from "lucide-react";
 import { useState } from "react";
 
