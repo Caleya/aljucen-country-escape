@@ -1,24 +1,726 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Star,
+  MapPin,
+  Wifi,
+  Car,
+  Wind,
+  Trees,
+  Sofa,
+  Sun,
+  ChefHat,
+  Coffee,
+  BedDouble,
+  Bath,
+  Tv,
+  Phone,
+  Mail,
+  MessageCircle,
+  Clock,
+  ArrowRight,
+  Menu,
+  X,
+  Users,
+  Home,
+  Mountain,
+  CalendarCheck,
+  Droplets,
+  Shirt,
+} from "lucide-react";
+import { useState } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import heroCasa from "@/assets/hero-casa.jpg";
+import salonInterior from "@/assets/salon-interior.jpg";
+import terrazaJardin from "@/assets/terraza-jardin.jpg";
+import entornoExtremadura from "@/assets/entorno-extremadura.jpg";
+import detalleRustico from "@/assets/detalle-rustico.jpg";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Casa Rural La Plata | Alojamiento en Aljucén, Extremadura" },
+      {
+        name: "description",
+        content:
+          "Casa Rural La Plata en Aljucén. Alojamiento con encanto, WiFi y parking gratis. A 15 km de Mérida. Reserva directa por teléfono o WhatsApp.",
+      },
+      {
+        property: "og:title",
+        content: "Casa Rural La Plata | Alojamiento en Aljucén, Extremadura",
+      },
+      {
+        property: "og:description",
+        content:
+          "Casa Rural La Plata en Aljucén. Alojamiento con encanto, WiFi y parking gratis. A 15 km de Mérida. Reserva directa por teléfono o WhatsApp.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "Casa Rural La Plata | Alojamiento en Aljucén, Extremadura",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Casa Rural La Plata en Aljucén. Alojamiento con encanto, WiFi y parking gratis. A 15 km de Mérida.",
+      },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LodgingBusiness",
+          name: "Casa Rural La Plata",
+          description:
+            "Alojamiento con encanto en Aljucén, Extremadura. WiFi y parking gratis, a 15 km de Mérida.",
+          url: "https://id-preview--071a932c-e943-43a1-815e-71f9365f3ca7.lovable.app/",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "9 Calle San Andrés",
+            addressLocality: "Aljucén",
+            addressRegion: "Badajoz",
+            postalCode: "06894",
+            addressCountry: "ES",
+          },
+          telephone: "+34000000000",
+          email: "reservas@casarurallaplata.com",
+          priceRange: "€€",
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "9.3",
+            reviewCount: "492",
+            bestRating: "10",
+          },
+          amenityFeature: [
+            { "@type": "LocationFeatureSpecification", name: "WiFi gratis", value: true },
+            { "@type": "LocationFeatureSpecification", name: "Parking gratis", value: true },
+            { "@type": "LocationFeatureSpecification", name: "Aire acondicionado", value: true },
+            { "@type": "LocationFeatureSpecification", name: "Jardín", value: true },
+            { "@type": "LocationFeatureSpecification", name: "Terraza", value: true },
+          ],
+        }),
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const navLinks = [
+  { label: "Inicio", href: "#inicio" },
+  { label: "La casa", href: "#casa" },
+  { label: "Habitaciones", href: "#habitaciones" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Entorno", href: "#entorno" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const rooms = [
+  {
+    title: "Habitación Doble Grande",
+    description: "Espaciosa y luminosa, ideal para una estancia tranquila.",
+    size: "20 m²",
+    features: [
+      { icon: BedDouble, text: "2 camas individuales" },
+      { icon: Bath, text: "Baño privado" },
+      { icon: Wind, text: "Aire acondicionado" },
+      { icon: Tv, text: "TV de pantalla plana" },
+      { icon: Coffee, text: "Lavavajillas" },
+      { icon: Sun, text: "Zona de comedor exterior" },
+    ],
+    image: salonInterior,
+  },
+  {
+    title: "Habitación Doble con balcón",
+    description: "Con balcón privado y vistas a la montaña y al pueblo.",
+    size: "20 m²",
+    features: [
+      { icon: BedDouble, text: "2 camas individuales" },
+      { icon: Home, text: "Balcón privado" },
+      { icon: Mountain, text: "Vistas a la montaña" },
+      { icon: Bath, text: "Baño privado" },
+      { icon: Wind, text: "Aire acondicionado" },
+      { icon: Wind, text: "Calefacción" },
+    ],
+    image: terrazaJardin,
+  },
+  {
+    title: "Habitación Doble con vistas",
+    description: "Disfruta de las mejores vistas a la montaña extremeña.",
+    size: "20 m²",
+    features: [
+      { icon: BedDouble, text: "2 camas individuales" },
+      { icon: Mountain, text: "Vistas a la montaña" },
+      { icon: MapPin, text: "Vistas a la ciudad" },
+      { icon: Bath, text: "Baño privado" },
+      { icon: Wind, text: "Aire acondicionado" },
+      { icon: Droplets, text: "Secador de pelo" },
+    ],
+    image: entornoExtremadura,
+  },
+];
+
+const services = [
+  { icon: Wifi, label: "WiFi gratis", description: "Conexión en todas las estancias" },
+  { icon: Car, label: "Parking gratis", description: "Aparcamiento en la calle" },
+  { icon: Wind, label: "Aire acondicionado", description: "Climatización individual" },
+  { icon: Trees, label: "Jardín", description: "Zona verde para relajarse" },
+  { icon: Sofa, label: "Salón común", description: "Espacio compartido acogedor" },
+  { icon: Sun, label: "Terraza", description: "Para disfrutar del buen tiempo" },
+  { icon: ChefHat, label: "Cocina compartida", description: "Totalmente equipada" },
+  { icon: Coffee, label: "Tetera/cafetera", description: "En todas las habitaciones" },
+];
+
+const testimonials = [
+  {
+    name: "Cristina",
+    text: "La casa es muy nueva, con detalles bonitos y buena atención, cerca de Mérida, cómoda.",
+  },
+  {
+    name: "Carlos",
+    text: "Muy amplio, comodidad y muy bien amueblado y decorado, una pena que solo haya quedado a dormir.",
+  },
+  {
+    name: "Deneb",
+    text: "Sitio tranquilo, amplias habitaciones y un patio que si viajas con perros es de gran ayuda. Muy limpio, camas cómodas, a 15 min de Mérida.",
+  },
+  {
+    name: "Mariano",
+    text: "Excelentes instalaciones, repetiré sin duda alguna.",
+  },
+];
+
 function Index() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <a href="#inicio" className="font-serif text-xl font-bold text-foreground sm:text-2xl">
+            Casa Rural La Plata
+          </a>
+
+          <nav className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                {link.label}
+              </a>
+            ))}
+            <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <a href="#contacto">Reservar</a>
+            </Button>
+          </nav>
+
+          <button
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {mobileMenuOpen && (
+          <div className="border-t border-border/50 bg-background px-4 py-4 md:hidden">
+            <nav className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-base font-medium text-muted-foreground transition-colors hover:text-primary"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                <a href="#contacto" onClick={() => setMobileMenuOpen(false)}>
+                  Reservar
+                </a>
+              </Button>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* Hero */}
+      <section id="inicio" className="relative flex min-h-[90vh] items-center justify-center pt-20">
+        <div className="absolute inset-0">
+          <img
+            src={heroCasa}
+            alt="Fachada de Casa Rural La Plata en Aljucén"
+            className="h-full w-full object-cover"
+            width={1280}
+            height={720}
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
+            <Badge className="bg-primary/90 text-primary-foreground hover:bg-primary">
+              <Star className="mr-1 h-3.5 w-3.5 fill-current" />
+              9,3/10
+            </Badge>
+            <span className="text-sm text-white/90">492 comentarios · Fantástico</span>
+          </div>
+          <h1 className="font-serif text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            Casa Rural La Plata
+          </h1>
+          <p className="mt-4 font-serif text-xl italic text-white/90 sm:text-2xl md:text-3xl">
+            Tu hogar en el corazón de Extremadura
+          </p>
+          <p className="mx-auto mt-6 max-w-2xl text-base text-white/80 sm:text-lg">
+            Alojamiento con encanto en Aljucén, a 15 km de Mérida. Disfruta de la tranquilidad, el confort y la
+            hospitalidad extremeña en un entorno único.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary px-8 text-lg text-primary-foreground hover:bg-primary/90"
+            >
+              <a href="#contacto">
+                Reservar ahora <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-white/30 bg-white/10 px-8 text-lg text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
+            >
+              <a href="#casa">Conocer la casa</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Sobre la casa */}
+      <section id="casa" className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="order-2 lg:order-1">
+              <img
+                src={detalleRustico}
+                alt="Detalle decorativo rústico de la casa"
+                className="rounded-2xl shadow-xl"
+                width={768}
+                height={1024}
+                loading="lazy"
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <span className="text-sm font-semibold uppercase tracking-wider text-primary">
+                Bienvenidos
+              </span>
+              <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+                Un rincón de paz en Aljucén
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+                Casa Rural La Plata te ofrece una experiencia auténtica en el corazón de Extremadura. Nuestra
+                casa combina el encanto de la arquitectura tradicional con todas las comodidades modernas para
+                que tu estancia sea inolvidable.
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+                Ubicada en el pintoresco pueblo de Aljucén, a solo 15 minutos de Mérida, es el punto de partida
+                ideal para descubrir el patrimonio romano, la naturaleza y la gastronomía de la zona.
+              </p>
+
+              <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <div className="rounded-xl bg-muted p-4 text-center">
+                  <div className="font-serif text-2xl font-bold text-primary">9,3</div>
+                  <div className="text-xs text-muted-foreground">Puntuación</div>
+                </div>
+                <div className="rounded-xl bg-muted p-4 text-center">
+                  <div className="font-serif text-2xl font-bold text-primary">492</div>
+                  <div className="text-xs text-muted-foreground">Opiniones</div>
+                </div>
+                <div className="rounded-xl bg-muted p-4 text-center">
+                  <div className="font-serif text-2xl font-bold text-primary">9,6</div>
+                  <div className="text-xs text-muted-foreground">Limpieza</div>
+                </div>
+                <div className="rounded-xl bg-muted p-4 text-center">
+                  <div className="font-serif text-2xl font-bold text-primary">9,4</div>
+                  <div className="text-xs text-muted-foreground">Ubicación</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Habitaciones */}
+      <section id="habitaciones" className="bg-muted/50 py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">Descansa</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              Nuestras habitaciones
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Tres opciones diseñadas para tu descanso, todas con baño privado y las comodidades que necesitas.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {rooms.map((room) => (
+              <Card key={room.title} className="overflow-hidden border-border bg-card">
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={room.image}
+                    alt={room.title}
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    width={1024}
+                    height={768}
+                    loading="lazy"
+                  />
+                </div>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="font-serif text-xl">{room.title}</CardTitle>
+                    <Badge variant="secondary">{room.size}</Badge>
+                  </div>
+                  <CardDescription>{room.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {room.features.map((feature) => {
+                      const FeatureIcon = feature.icon;
+                      return (
+                        <li key={feature.text} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <FeatureIcon className="h-4 w-4 text-primary" />
+                          {feature.text}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Servicios */}
+      <section id="servicios" className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">Comodidades</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              Servicios e instalaciones
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Todo lo que necesitas para una estancia cómoda y relajante.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Card
+                  key={service.label}
+                  className="border-border bg-card text-center transition-shadow hover:shadow-md"
+                >
+                  <CardContent className="pt-6">
+                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
+                      <Icon className="h-7 w-7 text-primary" />
+                    </div>
+                    <h3 className="mt-4 font-serif text-lg font-semibold">{service.label}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">{service.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            <div className="rounded-2xl bg-muted p-8">
+              <h3 className="font-serif text-2xl font-bold text-foreground">En cada habitación</h3>
+              <ul className="mt-6 grid grid-cols-2 gap-3">
+                {[
+                  "Baño privado",
+                  "TV de pantalla plana",
+                  "Aire acondicionado",
+                  "Calefacción",
+                  "Secador de pelo",
+                  "Artículos de aseo",
+                  "Ropa de cama",
+                  "Toallas",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-muted-foreground">
+                    <Bath className="h-4 w-4 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl bg-muted p-8">
+              <h3 className="font-serif text-2xl font-bold text-foreground">Zonas comunes</h3>
+              <ul className="mt-6 grid grid-cols-2 gap-3">
+                {[
+                  "Salón de uso común",
+                  "Cocina compartida",
+                  "Jardín",
+                  "Terraza",
+                  "Zona de comedor exterior",
+                  "Parking gratis",
+                  "WiFi gratis",
+                  "Juegos de mesa",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-muted-foreground">
+                    <Tv className="h-4 w-4 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ubicación */}
+      <section id="entorno" className="bg-muted/50 py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+              <span className="text-sm font-semibold uppercase tracking-wider text-primary">Descubre</span>
+              <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+                Aljucén y su entorno
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+                Aljucén es un tranquilo pueblo extremeño, perfecto como base para explorar la zona. Su
+                ubicación estratégica te permite disfrutar tanto del patrimonio histórico como de la naturaleza
+                de la comarca.
+              </p>
+
+              <div className="mt-8 space-y-4">
+                <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
+                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+                  <div>
+                    <h4 className="font-semibold">A 15 km de Mérida</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Acueducto de los Milagros, Basílica de Santa Eulalia y el impresionante conjunto
+                      monumental romano.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
+                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+                  <div>
+                    <h4 className="font-semibold">A 17 km del Teatro Romano</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Teatro y Anfiteatro Romano, joyas del patrimonio mundial de la UNESCO.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
+                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+                  <div>
+                    <h4 className="font-semibold">A 59 km del aeropuerto de Badajoz</h4>
+                    <p className="text-sm text-muted-foreground">Bien comunicado para viajeros de fuera.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <img
+                src={entornoExtremadura}
+                alt="Paisaje de la dehesa extremeña cerca de Aljucén"
+                className="rounded-2xl shadow-xl"
+                width={1280}
+                height={720}
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Opiniones */}
+      <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">Opiniones</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              Lo que dicen nuestros huéspedes
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              492 comentarios nos avalan con una valoración de 9,3/10.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {testimonials.map((testimonial) => (
+              <Card key={testimonial.name} className="border-border bg-card">
+                <CardContent className="pt-6">
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="mt-4 text-lg italic text-foreground">&ldquo;{testimonial.text}&rdquo;</p>
+                  <p className="mt-4 font-semibold text-primary">— {testimonial.name}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contacto */}
+      <section id="contacto" className="bg-primary py-20 text-primary-foreground sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div>
+              <span className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/80">
+                Reservas
+              </span>
+              <h2 className="mt-3 font-serif text-3xl font-bold sm:text-4xl">¿Hablamos?</h2>
+              <p className="mt-6 text-lg leading-relaxed text-primary-foreground/90">
+                Reserva directamente con nosotros y consigue el mejor trato y las mejores condiciones. Estamos
+                encantados de resolver tus dudas y ayudarte a planificar tu estancia.
+              </p>
+
+              <div className="mt-8 space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-foreground/10">
+                    <MapPin className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Dirección</h4>
+                    <p className="text-primary-foreground/90">9 Calle San Andrés, 06894 Aljucén, España</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-foreground/10">
+                    <Phone className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Teléfono</h4>
+                    <a href="tel:+34000000000" className="text-primary-foreground/90 hover:underline">
+                      +34 000 000 000
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-foreground/10">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Email</h4>
+                    <a
+                      href="mailto:reservas@casarurallaplata.com"
+                      className="text-primary-foreground/90 hover:underline"
+                    >
+                      reservas@casarurallaplata.com
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-foreground/10">
+                    <Clock className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Horarios</h4>
+                    <p className="text-primary-foreground/90">Entrada: 13:00 - 23:00</p>
+                    <p className="text-primary-foreground/90">Salida: 08:00 - 11:00</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                >
+                  <a href="tel:+34000000000">
+                    <Phone className="mr-2 h-5 w-5" /> Llamar ahora
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                >
+                  <a href="https://wa.me/34000000000" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
+                  </a>
+                </Button>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-primary-foreground/10 p-8 backdrop-blur-sm">
+              <h3 className="font-serif text-2xl font-bold">Información de reserva</h3>
+              <p className="mt-4 text-primary-foreground/90">
+                Para consultar disponibilidad y tarifas, contáctanos directamente. Te responderemos lo antes
+                posible.
+              </p>
+              <div className="mt-8 space-y-4">
+                <div className="flex items-center gap-3 rounded-xl bg-primary-foreground/10 p-4">
+                  <CalendarCheck className="h-5 w-5" />
+                  <span>Cancelación gratuita hasta 24 horas antes de la llegada</span>
+                </div>
+                <div className="flex items-center gap-3 rounded-xl bg-primary-foreground/10 p-4">
+                  <Car className="h-5 w-5" />
+                  <span>Parking gratuito disponible</span>
+                </div>
+                <div className="flex items-center gap-3 rounded-xl bg-primary-foreground/10 p-4">
+                  <Wifi className="h-5 w-5" />
+                  <span>WiFi gratuito en todas las instalaciones</span>
+                </div>
+                <div className="flex items-center gap-3 rounded-xl bg-primary-foreground/10 p-4">
+                  <Coffee className="h-5 w-5" />
+                  <span>Habitaciones equipadas con tetera y cafetera</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-background py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            <div className="text-center md:text-left">
+              <h3 className="font-serif text-xl font-bold text-foreground">Casa Rural La Plata</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                9 Calle San Andrés, 06894 Aljucén, Extremadura
+              </p>
+            </div>
+            <div className="flex gap-6">
+              <a href="#casa" className="text-sm text-muted-foreground hover:text-primary">
+                La casa
+              </a>
+              <a href="#habitaciones" className="text-sm text-muted-foreground hover:text-primary">
+                Habitaciones
+              </a>
+              <a href="#contacto" className="text-sm text-muted-foreground hover:text-primary">
+                Contacto
+              </a>
+            </div>
+          </div>
+          <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Casa Rural La Plata. Todos los derechos reservados.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
