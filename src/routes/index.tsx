@@ -71,6 +71,43 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LodgingBusiness",
+          name: "Casa Rural La Plata",
+          description:
+            "Alojamiento con encanto en Aljucén, Extremadura. WiFi y parking gratis, a 15 km de Mérida.",
+          url: "https://id-preview--071a932c-e943-43a1-815e-71f9365f3ca7.lovable.app/",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "9 Calle San Andrés",
+            addressLocality: "Aljucén",
+            addressRegion: "Badajoz",
+            postalCode: "06894",
+            addressCountry: "ES",
+          },
+          telephone: "+34000000000",
+          email: "reservas@casarurallaplata.com",
+          priceRange: "€€",
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "9.3",
+            reviewCount: "492",
+            bestRating: "10",
+          },
+          amenityFeature: [
+            { "@type": "LocationFeatureSpecification", name: "WiFi gratis", value: true },
+            { "@type": "LocationFeatureSpecification", name: "Parking gratis", value: true },
+            { "@type": "LocationFeatureSpecification", name: "Aire acondicionado", value: true },
+            { "@type": "LocationFeatureSpecification", name: "Jardín", value: true },
+            { "@type": "LocationFeatureSpecification", name: "Terraza", value: true },
+          ],
+        }),
+      },
+    ],
   }),
 });
 
