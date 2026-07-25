@@ -360,12 +360,15 @@ function Index() {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {room.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <BedDouble className="h-4 w-4 text-primary" />
-                        {feature}
-                      </li>
-                    ))}
+                    {room.features.map((feature) => {
+                      const FeatureIcon = feature.icon;
+                      return (
+                        <li key={feature.text} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <FeatureIcon className="h-4 w-4 text-primary" />
+                          {feature.text}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </CardContent>
               </Card>
