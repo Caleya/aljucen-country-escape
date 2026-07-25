@@ -633,7 +633,7 @@ function Index() {
               </p>
               <div className="mt-8 space-y-4">
                 <div className="flex items-center gap-3 rounded-xl bg-primary-foreground/10 p-4">
-                  <Heater className="h-5 w-5" />
+                  <CalendarCheck className="h-5 w-5" />
                   <span>Cancelación gratuita hasta 24 horas antes de la llegada</span>
                 </div>
                 <div className="flex items-center gap-3 rounded-xl bg-primary-foreground/10 p-4">
