@@ -1,80 +1,32 @@
-# Plan: Página web para Casa Rural La Plata (Aljucén)
-
 ## Objetivo
-Crear una landing page de una sola página para promocionar la Casa Rural La Plata en Aljucén (Extremadura), con estilo rústico y acogedor, información de contacto visible e imágenes generadas como placeholders.
+1. Que las fotos de las habitaciones sean pinchables y abran una galería emergente con más fotos reales.
+2. Añadir un botón/enlace a Booking en la sección "¿Hablamos?".
 
-## Información de partida confirmada
-- **Nombre:** Casa Rural La Plata
-- **Dirección:** 9 Calle San Andrés, 06894 Aljucén, España
-- **Puntuación:** 9,3/10 (492 comentarios en Booking.com)
-- **Categorías destacadas:** Personal 9,6 · Instalaciones 9,6 · Limpieza 9,6 · Confort 9,6 · Relación calidad-precio 9,6 · Ubicación 9,4
-- **Servicios principales:** WiFi gratis, parking gratis, aire acondicionado, jardín, salón de uso común, terraza, cocina compartida, habitaciones sin humo, habitaciones familiares, tetera/cafetera en habitaciones.
-- **Habitaciones:** Doble Grande (20 m²), Doble con balcón, Doble con vistas a la montaña. Todas con baño privado, TV de pantalla plana, lavavajillas, calefacción, secador de pelo.
-- **Entorno:** a 15 km de Mérida (Acueducto de los Milagros, Basílica de Santa Eulalia), 17 km del Teatro y Anfiteatro Romano, 59 km del aeropuerto de Badajoz.
-- **Normas:** entrada 13:00-23:00, salida 8:00-11:00.
-- **Preferencias del usuario:** estilo rústico y acogedor, imágenes placeholder, solo información de contacto (sin formulario).
+## 1. Fotos reales subidas
+Subir las 9 fotos aportadas a almacenamiento CDN (Lovable Assets) y repartirlas por habitación:
 
-## Estructura de la página
+- **Doble Grande**: salón-comedor con vigas, salón con TV, comedor con mesa.
+- **Doble con balcón**: cocina-salón, baño blanco con ducha, baño con lavabo y espejo.
+- **Doble con vistas**: dormitorio de dos camas, baño verde/turquesa, terraza con césped y vistas a la iglesia.
 
-1. **Hero**
-   - Imagen principal generada: fachada o patio de casa rural extremeña.
-   - Título "Casa Rural La Plata".
-   - Subtítulo con ubicación y puntuación destacada.
-   - Botón de CTA a la sección de contacto.
+La foto principal de cada tarjeta pasará a ser una foto real (dormitorio, salón, terraza) en lugar del placeholder generado. El resto de placeholders (hero, entorno) se mantienen hasta que envíes más fotos.
 
-2. **Sobre la casa**
-   - Breve descripción con encanto rural.
-   - Badges de puntuación (9,3), nº de opiniones y servicios estrella.
+## 2. Galería emergente (lightbox)
+- Cada tarjeta de habitación se vuelve pinchable (cursor, overlay con icono de lupa y texto "Ver fotos", accesible por teclado).
+- Al pinchar se abre un `Dialog` con:
+  - Carrusel de las fotos de esa habitación (flechas y puntos de navegación, swipe en móvil).
+  - Título de la habitación, metros y lista de comodidades.
+  - Botón de cierre y cierre con tecla Esc.
+- Componente nuevo `src/components/RoomGalleryDialog.tsx` usando `dialog` y `carousel` de shadcn ya presentes en el proyecto.
 
-3. **Habitaciones**
-   - 3 tarjetas: Doble Grande, Doble con balcón, Doble con vistas a la montaña.
-   - Lista de amenities por habitación.
-
-4. **Servicios e instalaciones**
-   - Grid visual con iconos para WiFi, parking, aire acondicionado, jardín, terraza, cocina compartida, etc.
-
-5. **Ubicación y entorno**
-   - Descripción de Aljucén y distancias a puntos de interés.
-   - Imagen generada del entorno natural.
-
-6. **Opiniones de huéspedes**
-   - 3-4 testimonios reales extraídos de Booking.com.
-
-7. **Contacto**
-   - Teléfono, email, WhatsApp y dirección completos.
-   - Botones con `tel:`, `mailto:` y enlace a WhatsApp.
-   - Horarios de entrada y salida.
-
-8. **Footer**
-   - Copyright y enlace a Booking.com (opcional).
-
-## Diseño y estilo
-- **Dirección visual:** rústica y acogedora, con tonos tierra, madera, beige y verde oliva.
-- **Tipografía:** serif clásica para títulos, sans-serif legible para cuerpo.
-- **Tokens CSS:** ajustar `src/styles.css` con paleta cálida (marrón, arena, verde musgo) manteniendo el sistema de variables semánticas.
-- **Componentes:** usar shadcn/ui existentes si los hay; si no, crear componentes locales simples.
-- **Responsive:** diseño mobile-first, navegación simple o ancla a secciones.
-
-## Imágenes
-- Generar 4-5 imágenes placeholder con imagegen:
-  1. Fachada/patio de casa rural extremeña.
-  2. Interior acogedor (salón o dormitorio).
-  3. Terraza/jardín con vegetación.
-  4. Entorno natural de Aljucén/Extremadura.
-  5. Detalle decorativo rústico.
-- Guardar en `src/assets/` e importar en los componentes.
-
-## SEO y metadatos
-- Título: "Casa Rural La Plata | Alojamiento en Aljucén, Extremadura"
-- Descripción: "Casa Rural La Plata en Aljucén. Alojamiento con encanto, WiFi y parking gratis. A 15 km de Mérida. Reserva directa por teléfono o WhatsApp."
-- `og:title`, `og:description`, `og:type`, `twitter:card` en `src/routes/index.tsx`.
-- Reemplazar el placeholder actual de `src/routes/index.tsx`.
+## 3. Enlace a Booking
+- En la sección "¿Hablamos?" (`#contacto`), junto a teléfono / email / WhatsApp, añadir una tarjeta-botón "Reservar en Booking.com" que abra la URL indicada en pestaña nueva (`target="_blank" rel="noopener noreferrer"`).
+- Añadir también el mismo enlace en el pie de página.
 
 ## Técnica
-- Reemplazar `src/routes/index.tsx` por la landing page completa.
-- Crear componentes auxiliares en `src/components/` si es necesario para mantener el archivo de ruta legible.
-- No requiere backend ni base de datos: solo contenido estático e información de contacto.
-- Verificar build y preview tras los cambios.
+- Fotos vía `lovable-assets` (punteros `.asset.json` en `src/assets/`), importados y usados por URL.
+- Estructura de datos `rooms` ampliada con un array `photos` por habitación.
+- Sin backend ni base de datos.
+- Verificación con build y captura de pantalla del diálogo abierto.
 
-## Entregable
-Landing page publicable en `/` con toda la información de Casa Rural La Plata, lista para que el usuario sustituya las imágenes placeholder por fotos reales cuando las tenga.
+Cuando me pases más fotos, las añado a las galerías correspondientes.
