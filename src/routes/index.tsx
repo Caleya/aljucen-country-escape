@@ -47,6 +47,14 @@ import foto06 from "@/assets/foto-06.asset.json";
 import foto07 from "@/assets/foto-07.asset.json";
 import foto08 from "@/assets/foto-08.asset.json";
 import foto09 from "@/assets/foto-09.asset.json";
+import foto10 from "@/assets/foto-10.asset.json";
+import foto11 from "@/assets/foto-11.asset.json";
+import foto12 from "@/assets/foto-12.asset.json";
+import foto13 from "@/assets/foto-13.asset.json";
+import foto14 from "@/assets/foto-14.asset.json";
+import foto15 from "@/assets/foto-15.asset.json";
+import foto16 from "@/assets/foto-16.asset.json";
+import foto17 from "@/assets/foto-17.asset.json";
 
 const BOOKING_URL =
   "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
@@ -152,6 +160,9 @@ const rooms = [
       { src: foto01.url, alt: "Salón comedor con cocina abierta" },
       { src: foto09.url, alt: "Zona de comedor con mesa para seis" },
       { src: foto06.url, alt: "Baño con ducha de obra" },
+      { src: foto17.url, alt: "Salón con sofá y techo de vigas" },
+      { src: foto12.url, alt: "Comedor con mesa blanca y cuadro del acueducto" },
+      { src: foto13.url, alt: "Cocina equipada con vigas de madera" },
     ],
   },
   {
@@ -170,7 +181,8 @@ const rooms = [
     photos: [
       { src: foto04.url, alt: "Cocina equipada junto al salón" },
       { src: foto05.url, alt: "Baño con lavabo y espejo redondo" },
-      { src: foto08.url, alt: "Terraza con césped y mesa de piedra" },
+      { src: foto10.url, alt: "Baño con lavabo, espejo y ducha" },
+      { src: foto15.url, alt: "Ducha de obra con mampara de cristal" },
     ],
   },
   {
@@ -190,6 +202,9 @@ const rooms = [
       { src: foto02.url, alt: "Dormitorio con dos camas individuales" },
       { src: foto03.url, alt: "Baño con azulejo verde agua y ducha" },
       { src: foto08.url, alt: "Terraza exterior con vistas a la iglesia" },
+      { src: foto11.url, alt: "Dormitorio con dos camas y techo de madera" },
+      { src: foto14.url, alt: "Dormitorio con dos camas y aire acondicionado" },
+      { src: foto16.url, alt: "Baño con ducha amplia de cristal" },
     ],
   },
 ];
