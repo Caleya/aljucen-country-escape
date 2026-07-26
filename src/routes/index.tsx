@@ -705,6 +705,16 @@ function Index() {
                   size="lg"
                   className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
                 >
+                  <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                    <CalendarCheck className="mr-2 h-5 w-5" /> Reservar en Booking.com
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                >
                   <a href="tel:+34000000000">
                     <Phone className="mr-2 h-5 w-5" /> Llamar ahora
                   </a>
@@ -746,6 +756,14 @@ function Index() {
                   <span>Habitaciones equipadas con tetera y cafetera</span>
                 </div>
               </div>
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-foreground px-5 py-3 font-semibold text-primary transition-opacity hover:opacity-90"
+              >
+                Ver disponibilidad en Booking.com <ExternalLink className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>
@@ -770,6 +788,14 @@ function Index() {
               </a>
               <a href="#contacto" className="text-sm text-muted-foreground hover:text-primary">
                 Contacto
+              </a>
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary"
+              >
+                Booking.com
               </a>
             </div>
           </div>
