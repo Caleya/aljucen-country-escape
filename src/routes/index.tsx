@@ -148,7 +148,13 @@ const rooms = [
       { icon: Coffee, text: "Lavavajillas" },
       { icon: Sun, text: "Zona de comedor exterior" },
     ],
-    image: salonInterior,
+    image: foto07.url,
+    photos: [
+      { src: foto07.url, alt: "Salón con TV y vigas de madera" },
+      { src: foto01.url, alt: "Salón comedor con cocina abierta" },
+      { src: foto09.url, alt: "Zona de comedor con mesa para seis" },
+      { src: foto06.url, alt: "Baño con ducha de obra" },
+    ],
   },
   {
     title: "Habitación Doble con balcón",
@@ -162,7 +168,12 @@ const rooms = [
       { icon: Wind, text: "Aire acondicionado" },
       { icon: Wind, text: "Calefacción" },
     ],
-    image: terrazaJardin,
+    image: foto04.url,
+    photos: [
+      { src: foto04.url, alt: "Cocina equipada junto al salón" },
+      { src: foto05.url, alt: "Baño con lavabo y espejo redondo" },
+      { src: foto08.url, alt: "Terraza con césped y mesa de piedra" },
+    ],
   },
   {
     title: "Habitación Doble con vistas",
@@ -176,7 +187,12 @@ const rooms = [
       { icon: Wind, text: "Aire acondicionado" },
       { icon: Droplets, text: "Secador de pelo" },
     ],
-    image: entornoExtremadura,
+    image: foto02.url,
+    photos: [
+      { src: foto02.url, alt: "Dormitorio con dos camas individuales" },
+      { src: foto03.url, alt: "Baño con azulejo verde agua y ducha" },
+      { src: foto08.url, alt: "Terraza exterior con vistas a la iglesia" },
+    ],
   },
 ];
 
