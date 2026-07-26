@@ -29,6 +29,8 @@ import {
   CalendarCheck,
   Droplets,
   Shirt,
+  Expand,
+  ExternalLink,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -37,6 +39,19 @@ import salonInterior from "@/assets/salon-interior.jpg";
 import terrazaJardin from "@/assets/terraza-jardin.jpg";
 import entornoExtremadura from "@/assets/entorno-extremadura.jpg";
 import detalleRustico from "@/assets/detalle-rustico.jpg";
+import { RoomGalleryDialog } from "@/components/RoomGalleryDialog";
+import foto01 from "@/assets/foto-01.asset.json";
+import foto02 from "@/assets/foto-02.asset.json";
+import foto03 from "@/assets/foto-03.asset.json";
+import foto04 from "@/assets/foto-04.asset.json";
+import foto05 from "@/assets/foto-05.asset.json";
+import foto06 from "@/assets/foto-06.asset.json";
+import foto07 from "@/assets/foto-07.asset.json";
+import foto08 from "@/assets/foto-08.asset.json";
+import foto09 from "@/assets/foto-09.asset.json";
+
+const BOOKING_URL =
+  "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
 
 export const Route = createFileRoute("/")({
   component: Index,
