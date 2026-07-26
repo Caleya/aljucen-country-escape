@@ -29,14 +29,27 @@ import {
   CalendarCheck,
   Droplets,
   Shirt,
+  Expand,
+  ExternalLink,
 } from "lucide-react";
 import { useState } from "react";
 
 import heroCasa from "@/assets/hero-casa.jpg";
-import salonInterior from "@/assets/salon-interior.jpg";
-import terrazaJardin from "@/assets/terraza-jardin.jpg";
 import entornoExtremadura from "@/assets/entorno-extremadura.jpg";
 import detalleRustico from "@/assets/detalle-rustico.jpg";
+import { RoomGalleryDialog } from "@/components/RoomGalleryDialog";
+import foto01 from "@/assets/foto-01.asset.json";
+import foto02 from "@/assets/foto-02.asset.json";
+import foto03 from "@/assets/foto-03.asset.json";
+import foto04 from "@/assets/foto-04.asset.json";
+import foto05 from "@/assets/foto-05.asset.json";
+import foto06 from "@/assets/foto-06.asset.json";
+import foto07 from "@/assets/foto-07.asset.json";
+import foto08 from "@/assets/foto-08.asset.json";
+import foto09 from "@/assets/foto-09.asset.json";
+
+const BOOKING_URL =
+  "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -133,7 +146,13 @@ const rooms = [
       { icon: Coffee, text: "Lavavajillas" },
       { icon: Sun, text: "Zona de comedor exterior" },
     ],
-    image: salonInterior,
+    image: foto07.url,
+    photos: [
+      { src: foto07.url, alt: "Salón con TV y vigas de madera" },
+      { src: foto01.url, alt: "Salón comedor con cocina abierta" },
+      { src: foto09.url, alt: "Zona de comedor con mesa para seis" },
+      { src: foto06.url, alt: "Baño con ducha de obra" },
+    ],
   },
   {
     title: "Habitación Doble con balcón",
@@ -147,7 +166,12 @@ const rooms = [
       { icon: Wind, text: "Aire acondicionado" },
       { icon: Wind, text: "Calefacción" },
     ],
-    image: terrazaJardin,
+    image: foto04.url,
+    photos: [
+      { src: foto04.url, alt: "Cocina equipada junto al salón" },
+      { src: foto05.url, alt: "Baño con lavabo y espejo redondo" },
+      { src: foto08.url, alt: "Terraza con césped y mesa de piedra" },
+    ],
   },
   {
     title: "Habitación Doble con vistas",
@@ -161,7 +185,12 @@ const rooms = [
       { icon: Wind, text: "Aire acondicionado" },
       { icon: Droplets, text: "Secador de pelo" },
     ],
-    image: entornoExtremadura,
+    image: foto02.url,
+    photos: [
+      { src: foto02.url, alt: "Dormitorio con dos camas individuales" },
+      { src: foto03.url, alt: "Baño con azulejo verde agua y ducha" },
+      { src: foto08.url, alt: "Terraza exterior con vistas a la iglesia" },
+    ],
   },
 ];
 
@@ -197,6 +226,7 @@ const testimonials = [
 
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeRoom, setActiveRoom] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -378,16 +408,29 @@ function Index() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {rooms.map((room) => (
               <Card key={room.title} className="overflow-hidden border-border bg-card">
-                <div className="aspect-[4/3] overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setActiveRoom(room.title)}
+                  aria-label={`Ver más fotos de ${room.title}`}
+                  className="group relative block aspect-[4/3] w-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
                   <img
                     src={room.image}
                     alt={room.title}
-                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     width={1024}
                     height={768}
                     loading="lazy"
                   />
-                </div>
+                  <span className="absolute inset-0 flex items-center justify-center bg-foreground/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                    <span className="flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-semibold text-foreground">
+                      <Expand className="h-4 w-4" /> Ver fotos
+                    </span>
+                  </span>
+                  <span className="absolute bottom-3 right-3 rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
+                    {room.photos.length} fotos
+                  </span>
+                </button>
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="font-serif text-xl">{room.title}</CardTitle>
@@ -411,6 +454,18 @@ function Index() {
               </Card>
             ))}
           </div>
+
+          {rooms.map((room) => (
+            <RoomGalleryDialog
+              key={room.title}
+              open={activeRoom === room.title}
+              onOpenChange={(open) => setActiveRoom(open ? room.title : null)}
+              title={room.title}
+              size={room.size}
+              description={room.description}
+              photos={room.photos}
+            />
+          ))}
         </div>
       </section>
 
@@ -648,6 +703,16 @@ function Index() {
                   size="lg"
                   className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
                 >
+                  <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                    <CalendarCheck className="mr-2 h-5 w-5" /> Reservar en Booking.com
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                >
                   <a href="tel:+34000000000">
                     <Phone className="mr-2 h-5 w-5" /> Llamar ahora
                   </a>
@@ -689,6 +754,14 @@ function Index() {
                   <span>Habitaciones equipadas con tetera y cafetera</span>
                 </div>
               </div>
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-foreground px-5 py-3 font-semibold text-primary transition-opacity hover:opacity-90"
+              >
+                Ver disponibilidad en Booking.com <ExternalLink className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>
@@ -713,6 +786,14 @@ function Index() {
               </a>
               <a href="#contacto" className="text-sm text-muted-foreground hover:text-primary">
                 Contacto
+              </a>
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary"
+              >
+                Booking.com
               </a>
             </div>
           </div>
