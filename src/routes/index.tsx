@@ -409,16 +409,29 @@ function Index() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {rooms.map((room) => (
               <Card key={room.title} className="overflow-hidden border-border bg-card">
-                <div className="aspect-[4/3] overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setActiveRoom(room.title)}
+                  aria-label={`Ver más fotos de ${room.title}`}
+                  className="group relative block aspect-[4/3] w-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
                   <img
                     src={room.image}
                     alt={room.title}
-                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     width={1024}
                     height={768}
                     loading="lazy"
                   />
-                </div>
+                  <span className="absolute inset-0 flex items-center justify-center bg-foreground/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                    <span className="flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-semibold text-foreground">
+                      <Expand className="h-4 w-4" /> Ver fotos
+                    </span>
+                  </span>
+                  <span className="absolute bottom-3 right-3 rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
+                    {room.photos.length} fotos
+                  </span>
+                </button>
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="font-serif text-xl">{room.title}</CardTitle>
@@ -442,6 +455,18 @@ function Index() {
               </Card>
             ))}
           </div>
+
+          {rooms.map((room) => (
+            <RoomGalleryDialog
+              key={room.title}
+              open={activeRoom === room.title}
+              onOpenChange={(open) => setActiveRoom(open ? room.title : null)}
+              title={room.title}
+              size={room.size}
+              description={room.description}
+              photos={room.photos}
+            />
+          ))}
         </div>
       </section>
 
