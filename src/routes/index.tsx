@@ -35,8 +35,6 @@ import {
 import { useState } from "react";
 
 import heroCasa from "@/assets/hero-casa.jpg";
-import salonInterior from "@/assets/salon-interior.jpg";
-import terrazaJardin from "@/assets/terraza-jardin.jpg";
 import entornoExtremadura from "@/assets/entorno-extremadura.jpg";
 import detalleRustico from "@/assets/detalle-rustico.jpg";
 import { RoomGalleryDialog } from "@/components/RoomGalleryDialog";
