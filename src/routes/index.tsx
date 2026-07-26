@@ -34,9 +34,46 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import heroCasa from "@/assets/hero-casa.jpg";
+import heroCasa from "@/assets/367534298.jpg";
 import entornoExtremadura from "@/assets/entorno-extremadura.jpg";
 import detalleRustico from "@/assets/detalle-rustico.jpg";
+import img357572260 from "@/assets/357572260.jpg";
+import img357572268 from "@/assets/357572268.jpg";
+import img357572272 from "@/assets/357572272.jpg";
+import img357572274 from "@/assets/357572274.jpg";
+import img357572277 from "@/assets/357572277.jpg";
+import img357572281 from "@/assets/357572281.jpg";
+import img357572284 from "@/assets/357572284.jpg";
+import img357572288 from "@/assets/357572288.jpg";
+import img357572291 from "@/assets/357572291.jpg";
+import img357572294 from "@/assets/357572294.jpg";
+import img357572301 from "@/assets/357572301.jpg";
+import img357572305 from "@/assets/357572305.jpg";
+import img357572310 from "@/assets/357572310.jpg";
+import img357572312 from "@/assets/357572312.jpg";
+import img357572317 from "@/assets/357572317.jpg";
+import img357572319 from "@/assets/357572319.jpg";
+import img367520139 from "@/assets/367520139.jpg";
+import img367520354 from "@/assets/367520354.jpg";
+import img367520365 from "@/assets/367520365.jpg";
+import img367520394 from "@/assets/367520394.jpg";
+import img367528614 from "@/assets/367528614.jpg";
+import img367528667 from "@/assets/367528667.jpg";
+import img367528681 from "@/assets/367528681.jpg";
+import img367528688 from "@/assets/367528688.jpg";
+import img367530038 from "@/assets/367530038.jpg";
+import img367530060 from "@/assets/367530060.jpg";
+import img367530078 from "@/assets/367530078.jpg";
+import img367530082 from "@/assets/367530082.jpg";
+import img367534281 from "@/assets/367534281.jpg";
+import img367534576 from "@/assets/367534576.jpg";
+import img367534587 from "@/assets/367534587.jpg";
+import img367534599 from "@/assets/367534599.jpg";
+import img367534714 from "@/assets/367534714.jpg";
+import imgFoto1 from "@/assets/foto1.jpg";
+import imgIglesiaAljucen from "@/assets/iglesiaAljucen.jpg";
+import imgSalonInterior from "@/assets/salon-interior.jpg";
+import imgTerrazaJardin from "@/assets/terraza-jardin.jpg";
 import { RoomGalleryDialog } from "@/components/RoomGalleryDialog";
 import foto01 from "@/assets/foto-01.asset.json";
 import foto02 from "@/assets/foto-02.asset.json";
@@ -64,7 +101,7 @@ import foto23 from "@/assets/foto-23.asset.json";
 import foto24 from "@/assets/foto-24.asset.json";
 import foto25 from "@/assets/foto-25.asset.json";
 import foto26 from "@/assets/foto-26.asset.json";
-
+decorativo
 const BOOKING_URL =
   "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
 
@@ -163,11 +200,11 @@ const rooms = [
       { icon: Coffee, text: "Lavavajillas" },
       { icon: Sun, text: "Zona de comedor exterior" },
     ],
-    image: "/367530038.jpg",
+    image: img367530038,
     photos: [
-      { src: "367530082.jpg" },
-      { src: "367530078.jpg" },
-      { src: "367530060.jpg"},
+      { src: img367530082, alt: ""},
+      { src: img367530078, alt: "" },
+      { src: img367530060, alt: ""},
     ],
   },
   {
@@ -182,11 +219,11 @@ const rooms = [
       { icon: Wind, text: "Aire acondicionado" },
       { icon: Wind, text: "Calefacción" },
     ],
-    image: "367520354.jpg",
+    image: img367520354,
     photos: [
-      { src: "367520365.jpg"},
-      { src: "367520139.jpg" },
-      { src: "367520394.jpg" },
+      { src: img367520365, alt: ""},
+      { src: img367520139, alt: "" },
+      { src: img367520394, alt: "" },
     ],
   },
   {
@@ -201,11 +238,11 @@ const rooms = [
       { icon: Wind, text: "Aire acondicionado" },
       { icon: Droplets, text: "Secador de pelo" },
     ],
-    image: "367528681.jpg",
+    image: img367528681,
     photos: [
-      { src: "367528667.jpg" },
-      { src: "357572294.jpg" },
-      { src: "367528614.jpg" },
+      { src: img367528667, alt: ""},
+      { src: img357572294, alt: "" },
+      { src: img367528614, alt: "" },
     ],
   },
 ];
@@ -303,8 +340,8 @@ function Index() {
       {/* Hero */}
       <section id="inicio" className="relative flex min-h-[90vh] items-center justify-center pt-20">
         <div className="absolute inset-0">
-          <img
-            src={367534298}
+          <img            
+            src={heroCasa}
             alt="Fachada de Casa Rural La Plata en Aljucén"
             className="h-full w-full object-cover"
             width={1280}
@@ -360,7 +397,7 @@ function Index() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="order-2 lg:order-1">
               <img
-                src={367534281}
+                src={img367534281}
                 alt="Detalle decorativo rústico de la casa"
                 className="rounded-2xl shadow-xl"
                 width={768}
@@ -620,7 +657,7 @@ function Index() {
             </div>
             <div>
               <img
-                src={iglesiaAljucen}
+                src={imgIglesiaAljucen}
                 alt="Paisaje de la dehesa extremeña cerca de Aljucén"
                 className="rounded-2xl shadow-xl"
                 width={1280}
