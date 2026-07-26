@@ -623,6 +623,17 @@ function Index() {
                   </div>
                 </div>
               </div>
+
+              <Button asChild size="lg" className="mt-8">
+                <a
+                  href="https://www.google.com/maps/place/Casa+rural+la+plata/@39.043433,-6.3329939,17z/data=!3m1!4b1!4m6!3m5!1s0xd1429e6f81d19ff:0xe194858a42ad8828!8m2!3d39.043433!4d-6.330419!16s%2Fg%2F11t0m51xtq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPin className="h-5 w-5" />
+                  Ver ubicación en Google Maps
+                </a>
+              </Button>
             </div>
             <div>
               <img
