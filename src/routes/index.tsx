@@ -163,16 +163,11 @@ const rooms = [
       { icon: Coffee, text: "Lavavajillas" },
       { icon: Sun, text: "Zona de comedor exterior" },
     ],
-    image: foto07.url,
+    image: "/367530038.jpg",
     photos: [
-      { src: foto07.url, alt: "Salón con TV y vigas de madera" },
-      { src: foto01.url, alt: "Salón comedor con cocina abierta" },
-      { src: foto09.url, alt: "Zona de comedor con mesa para seis" },
-      { src: foto06.url, alt: "Baño con ducha de obra" },
-      { src: foto17.url, alt: "Salón con sofá y techo de vigas" },
-      { src: foto12.url, alt: "Comedor con mesa blanca y cuadro del acueducto" },
-      { src: foto13.url, alt: "Cocina equipada con vigas de madera" },
-      { src: foto19.url, alt: "Cocina con columnas de ladrillo visto" },
+      { src: "367530082.jpg" },
+      { src: "367530078.jpg" },
+      { src: "367530060.jpg"},
     ],
   },
   {
@@ -187,16 +182,11 @@ const rooms = [
       { icon: Wind, text: "Aire acondicionado" },
       { icon: Wind, text: "Calefacción" },
     ],
-    image: foto04.url,
+    image: "367520354.jpg",
     photos: [
-      { src: foto04.url, alt: "Cocina equipada junto al salón" },
-      { src: foto05.url, alt: "Baño con lavabo y espejo redondo" },
-      { src: foto10.url, alt: "Baño con lavabo, espejo y ducha" },
-      { src: foto15.url, alt: "Ducha de obra con mampara de cristal" },
-      { src: foto18.url, alt: "Dormitorio con dos camas y cuadro marino" },
-      { src: foto20.url, alt: "Escritorio con TV y espejo de cuerpo entero" },
-      { src: foto22.url, alt: "Baño con ducha de obra y mampara" },
-      { src: foto26.url, alt: "Baño con azulejo verde agua y lavabo" },
+      { src: "367520365.jpg"},
+      { src: "367520139.jpg" },
+      { src: "367520394.jpg" },
     ],
   },
   {
@@ -211,18 +201,11 @@ const rooms = [
       { icon: Wind, text: "Aire acondicionado" },
       { icon: Droplets, text: "Secador de pelo" },
     ],
-    image: foto02.url,
+    image: "367528681.jpg",
     photos: [
-      { src: foto02.url, alt: "Dormitorio con dos camas individuales" },
-      { src: foto03.url, alt: "Baño con azulejo verde agua y ducha" },
-      { src: foto08.url, alt: "Terraza exterior con vistas a la iglesia" },
-      { src: foto11.url, alt: "Dormitorio con dos camas y techo de madera" },
-      { src: foto14.url, alt: "Dormitorio con dos camas y aire acondicionado" },
-      { src: foto16.url, alt: "Baño con ducha amplia de cristal" },
-      { src: foto21.url, alt: "Escritorio con espejo y zona de café" },
-      { src: foto23.url, alt: "Dormitorio amplio con dos camas" },
-      { src: foto24.url, alt: "Dormitorio con armario y televisión" },
-      { src: foto25.url, alt: "Dormitorio con armario, escritorio y TV" },
+      { src: "367528667.jpg" },
+      { src: "357572294.jpg" },
+      { src: "367528614.jpg" },
     ],
   },
 ];
@@ -321,7 +304,7 @@ function Index() {
       <section id="inicio" className="relative flex min-h-[90vh] items-center justify-center pt-20">
         <div className="absolute inset-0">
           <img
-            src={heroCasa}
+            src={367534298}
             alt="Fachada de Casa Rural La Plata en Aljucén"
             className="h-full w-full object-cover"
             width={1280}
@@ -377,7 +360,7 @@ function Index() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="order-2 lg:order-1">
               <img
-                src={detalleRustico}
+                src={367534281}
                 alt="Detalle decorativo rústico de la casa"
                 className="rounded-2xl shadow-xl"
                 width={768}
@@ -394,12 +377,12 @@ function Index() {
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                 Casa Rural La Plata te ofrece una experiencia auténtica en el corazón de Extremadura. Nuestra
-                casa combina el encanto de la arquitectura tradicional con todas las comodidades modernas para
+                casa combina una experiencia rústica y alejada de la vida urbana con todas las comodidades modernas para
                 que tu estancia sea inolvidable.
               </p>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                Ubicada en el pintoresco pueblo de Aljucén, a solo 15 minutos de Mérida, es el punto de partida
-                ideal para descubrir el patrimonio romano, la naturaleza y la gastronomía de la zona.
+                Ubicada en el centro del pueblo de Aljucén, a solo 15 minutos de Mérida, es el punto de partida
+                ideal para descubrir la naturaleza y la gastronomía de la zona (MÁS OCIO?).
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -586,20 +569,20 @@ function Index() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
               <span className="text-sm font-semibold uppercase tracking-wider text-primary">Descubre</span>
-              <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              <h2 className="mt-3 font-serif text-3 xl font-bold text-foreground sm:text-4xl">
                 Aljucén y su entorno
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Aljucén es un tranquilo pueblo extremeño, perfecto como base para explorar la zona. Su
+                Aljucén es un tranquilo pueblo extremeño, perfecto para explorar la zona. Su
                 ubicación estratégica te permite disfrutar tanto del patrimonio histórico como de la naturaleza
-                de la comarca.
+                de extremeña.
               </p>
 
               <div className="mt-8 space-y-4">
                 <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
                   <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                   <div>
-                    <h4 className="font-semibold">A 15 km de Mérida</h4>
+                    <h4 className="font-semibold">A 15 km de Mérida y de su Teatro Romano</h4>
                     <p className="text-sm text-muted-foreground">
                       Acueducto de los Milagros, Basílica de Santa Eulalia y el impresionante conjunto
                       monumental romano.
@@ -609,9 +592,9 @@ function Index() {
                 <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
                   <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                   <div>
-                    <h4 className="font-semibold">A 17 km del Teatro Romano</h4>
+                    <h4 className="font-semibold">Rutas de senderismo</h4>
                     <p className="text-sm text-muted-foreground">
-                      Teatro y Anfiteatro Romano, joyas del patrimonio mundial de la UNESCO.
+                      Kilometros de caminos rurales para disfrutar del paisaje extremeño.
                     </p>
                   </div>
                 </div>
@@ -637,7 +620,7 @@ function Index() {
             </div>
             <div>
               <img
-                src={entornoExtremadura}
+                src={iglesiaAljucen}
                 alt="Paisaje de la dehesa extremeña cerca de Aljucén"
                 className="rounded-2xl shadow-xl"
                 width={1280}
