@@ -101,7 +101,7 @@ import foto23 from "@/assets/foto-23.asset.json";
 import foto24 from "@/assets/foto-24.asset.json";
 import foto25 from "@/assets/foto-25.asset.json";
 import foto26 from "@/assets/foto-26.asset.json";
-decorativo
+
 const BOOKING_URL =
   "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
 
