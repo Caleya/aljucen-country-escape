@@ -55,6 +55,15 @@ import foto14 from "@/assets/foto-14.asset.json";
 import foto15 from "@/assets/foto-15.asset.json";
 import foto16 from "@/assets/foto-16.asset.json";
 import foto17 from "@/assets/foto-17.asset.json";
+import foto18 from "@/assets/foto-18.asset.json";
+import foto19 from "@/assets/foto-19.asset.json";
+import foto20 from "@/assets/foto-20.asset.json";
+import foto21 from "@/assets/foto-21.asset.json";
+import foto22 from "@/assets/foto-22.asset.json";
+import foto23 from "@/assets/foto-23.asset.json";
+import foto24 from "@/assets/foto-24.asset.json";
+import foto25 from "@/assets/foto-25.asset.json";
+import foto26 from "@/assets/foto-26.asset.json";
 
 const BOOKING_URL =
   "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
@@ -163,6 +172,7 @@ const rooms = [
       { src: foto17.url, alt: "Salón con sofá y techo de vigas" },
       { src: foto12.url, alt: "Comedor con mesa blanca y cuadro del acueducto" },
       { src: foto13.url, alt: "Cocina equipada con vigas de madera" },
+      { src: foto19.url, alt: "Cocina con columnas de ladrillo visto" },
     ],
   },
   {
@@ -183,6 +193,10 @@ const rooms = [
       { src: foto05.url, alt: "Baño con lavabo y espejo redondo" },
       { src: foto10.url, alt: "Baño con lavabo, espejo y ducha" },
       { src: foto15.url, alt: "Ducha de obra con mampara de cristal" },
+      { src: foto18.url, alt: "Dormitorio con dos camas y cuadro marino" },
+      { src: foto20.url, alt: "Escritorio con TV y espejo de cuerpo entero" },
+      { src: foto22.url, alt: "Baño con ducha de obra y mampara" },
+      { src: foto26.url, alt: "Baño con azulejo verde agua y lavabo" },
     ],
   },
   {
@@ -205,6 +219,10 @@ const rooms = [
       { src: foto11.url, alt: "Dormitorio con dos camas y techo de madera" },
       { src: foto14.url, alt: "Dormitorio con dos camas y aire acondicionado" },
       { src: foto16.url, alt: "Baño con ducha amplia de cristal" },
+      { src: foto21.url, alt: "Escritorio con espejo y zona de café" },
+      { src: foto23.url, alt: "Dormitorio amplio con dos camas" },
+      { src: foto24.url, alt: "Dormitorio con armario y televisión" },
+      { src: foto25.url, alt: "Dormitorio con armario, escritorio y TV" },
     ],
   },
 ];
