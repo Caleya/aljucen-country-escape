@@ -84,6 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
       },
       { name: "author", content: "Casa Rural La Plata" },
+      {
+        name: "google-site-verification",
+        content: "0B1VYzO021_lDD2aQrgfIefBkDghzmERVohHkkbn6Z8",
+      },
       { property: "og:site_name", content: "Casa Rural La Plata" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
