@@ -122,7 +122,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Casa rural en Aljucén, a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
@@ -134,7 +134,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "Casa rural en Aljucén, junto a Mérida, la Vía de la Plata y el Parque Natural de Cornalvo.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
       },
     ],
     links: [{ rel: "canonical", href: "/" }],

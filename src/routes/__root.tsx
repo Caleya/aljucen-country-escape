@@ -77,17 +77,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Casa Rural La Plata | Aljucén, Extremadura" },
+      { title: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo" },
       {
         name: "description",
         content:
-          "Casa rural en Aljucén, a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
       },
       { name: "author", content: "Casa Rural La Plata" },
       { property: "og:site_name", content: "Casa Rural La Plata" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { property: "og:title", content: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo" },
+      { name: "twitter:title", content: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo" },
+      { property: "og:description", content: "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis." },
+      { name: "twitter:description", content: "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6c94080a-df86-4b8f-90f8-6914ffd51396/id-preview-e52e90e4--071a932c-e943-43a1-815e-71f9365f3ca7.lovable.app-1785340436284.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6c94080a-df86-4b8f-90f8-6914ffd51396/id-preview-e52e90e4--071a932c-e943-43a1-815e-71f9365f3ca7.lovable.app-1785340436284.png" },
     ],
     links: [
       {
