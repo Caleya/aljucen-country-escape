@@ -109,32 +109,32 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Casa Rural La Plata | Alojamiento en Aljucén, Extremadura" },
+      { title: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo" },
       {
         name: "description",
         content:
-          "Casa Rural La Plata en Aljucén. Alojamiento con encanto, WiFi y parking gratis. A 15 km de Mérida. Reserva directa por teléfono o WhatsApp.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
       },
       {
         property: "og:title",
-        content: "Casa Rural La Plata | Alojamiento en Aljucén, Extremadura",
+        content: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo",
       },
       {
         property: "og:description",
         content:
-          "Casa Rural La Plata en Aljucén. Alojamiento con encanto, WiFi y parking gratis. A 15 km de Mérida. Reserva directa por teléfono o WhatsApp.",
+          "Casa rural en Aljucén, a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Casa Rural La Plata | Alojamiento en Aljucén, Extremadura",
+        content: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo",
       },
       {
         name: "twitter:description",
         content:
-          "Casa Rural La Plata en Aljucén. Alojamiento con encanto, WiFi y parking gratis. A 15 km de Mérida.",
+          "Casa rural en Aljucén, junto a Mérida, la Vía de la Plata y el Parque Natural de Cornalvo.",
       },
     ],
     links: [{ rel: "canonical", href: "/" }],
