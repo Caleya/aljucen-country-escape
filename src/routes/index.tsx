@@ -837,8 +837,8 @@ function Index() {
                   </div>
                   <div>
                     <h4 className="font-semibold">Teléfono</h4>
-                    <a href="tel:+34000000000" className="text-primary-foreground/90 hover:underline">
-                      +34 000 000 000
+                    <a href={PHONE_HREF} className="text-lg font-semibold hover:underline">
+                      {PHONE_DISPLAY}
                     </a>
                   </div>
                 </div>
@@ -848,11 +848,8 @@ function Index() {
                   </div>
                   <div>
                     <h4 className="font-semibold">Email</h4>
-                    <a
-                      href="mailto:reservas@casarurallaplata.com"
-                      className="text-primary-foreground/90 hover:underline"
-                    >
-                      reservas@casarurallaplata.com
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary-foreground/90 hover:underline">
+                      {CONTACT_EMAIL}
                     </a>
                   </div>
                 </div>
@@ -868,36 +865,49 @@ function Index() {
                 </div>
               </div>
 
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-10 space-y-4">
                 <Button
                   asChild
                   size="lg"
-                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                  className="w-full bg-primary-foreground py-7 text-lg font-bold text-primary shadow-lg hover:bg-primary-foreground/90 sm:w-auto sm:px-10"
                 >
-                  <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                    <CalendarCheck className="mr-2 h-5 w-5" /> Reservar en Booking.com
+                  <a href={PHONE_HREF}>
+                    <Phone className="mr-2 h-6 w-6" /> Llamar ahora · {PHONE_DISPLAY}
                   </a>
                 </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                <p className="text-sm text-primary-foreground/80">
+                  Reserva directa por teléfono: mejor precio, sin comisiones y disponibilidad al momento.
+                </p>
+                <div className="flex flex-col gap-4 sm:flex-row">
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                  >
+                    <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
+                    </a>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                  >
+                    <a href="#reservar">
+                      <CalendarCheck className="mr-2 h-5 w-5" /> Formulario de reserva
+                    </a>
+                  </Button>
+                </div>
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-primary-foreground/70 underline underline-offset-4 hover:text-primary-foreground"
                 >
-                  <a href="tel:+34000000000">
-                    <Phone className="mr-2 h-5 w-5" /> Llamar ahora
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-                >
-                  <a href="https://wa.me/34000000000" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
-                  </a>
-                </Button>
+                  O reservar en Booking.com <ExternalLink className="h-3.5 w-3.5" />
+                </a>
               </div>
             </div>
 
@@ -926,12 +936,18 @@ function Index() {
                 </div>
               </div>
               <a
+                href={PHONE_HREF}
+                className="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-foreground px-5 py-4 text-lg font-bold text-primary transition-opacity hover:opacity-90"
+              >
+                <Phone className="h-5 w-5" /> Llamar al {PHONE_DISPLAY}
+              </a>
+              <a
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-foreground px-5 py-3 font-semibold text-primary transition-opacity hover:opacity-90"
+                className="mt-4 flex items-center justify-center gap-1.5 text-sm text-primary-foreground/70 underline underline-offset-4 hover:text-primary-foreground"
               >
-                Ver disponibilidad en Booking.com <ExternalLink className="h-4 w-4" />
+                Ver disponibilidad en Booking.com <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
