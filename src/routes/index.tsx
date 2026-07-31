@@ -391,10 +391,10 @@ function Index() {
             <Button
               asChild
               size="lg"
-              className="bg-primary px-8 text-lg text-primary-foreground hover:bg-primary/90"
+              className="bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90"
             >
-              <a href="#contacto">
-                Reservar ahora <ArrowRight className="ml-2 h-5 w-5" />
+              <a href={PHONE_HREF}>
+                <Phone className="mr-2 h-5 w-5" /> Llamar ahora · {PHONE_DISPLAY}
               </a>
             </Button>
             <Button
@@ -403,9 +403,14 @@ function Index() {
               size="lg"
               className="border-white/30 bg-white/10 px-8 text-lg text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
             >
-              <a href="#casa">Conocer la casa</a>
+              <a href="#reservar">
+                Solicitar reserva <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
             </Button>
           </div>
+          <p className="mt-4 text-sm text-white/80">
+            Reserva directa por teléfono: mejor precio y disponibilidad real.
+          </p>
         </div>
       </section>
 
