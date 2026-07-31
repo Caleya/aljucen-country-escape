@@ -75,6 +75,7 @@ import imgIglesiaAljucen from "@/assets/iglesiaAljucen.jpg";
 import imgSalonInterior from "@/assets/salon-interior.jpg";
 import imgTerrazaJardin from "@/assets/terraza-jardin.jpg";
 import { RoomGalleryDialog } from "@/components/RoomGalleryDialog";
+import { ReservationForm, CONTACT_EMAIL } from "@/components/ReservationForm";
 import foto01 from "@/assets/foto-01.asset.json";
 import foto02 from "@/assets/foto-02.asset.json";
 import foto03 from "@/assets/foto-03.asset.json";
@@ -104,6 +105,10 @@ import foto26 from "@/assets/foto-26.asset.json";
 
 const BOOKING_URL =
   "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
+
+const PHONE_DISPLAY = "691 231 248";
+const PHONE_HREF = "tel:+34691231248";
+const WHATSAPP_HREF = "https://wa.me/34691231248";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -156,8 +161,8 @@ export const Route = createFileRoute("/")({
             postalCode: "06894",
             addressCountry: "ES",
           },
-          telephone: "+34000000000",
-          email: "reservas@casarurallaplata.com",
+          telephone: "+34691231248",
+          email: "casarurallaplata@gmail.com",
           priceRange: "€€",
           aggregateRating: {
             "@type": "AggregateRating",
@@ -182,9 +187,22 @@ const navLinks = [
   { label: "Inicio", href: "#inicio" },
   { label: "La casa", href: "#casa" },
   { label: "Habitaciones", href: "#habitaciones" },
+  { label: "Zonas comunes", href: "#zonas-comunes" },
   { label: "Servicios", href: "#servicios" },
   { label: "Entorno", href: "#entorno" },
   { label: "Contacto", href: "#contacto" },
+];
+
+const commonAreaPhotos = [
+  { src: img357572277, alt: "Salón común con sofá y televisión" },
+  { src: img357572260, alt: "Salón-comedor con vigas de madera y cocina al fondo" },
+  { src: img357572272, alt: "Cocina compartida totalmente equipada" },
+  { src: img357572268, alt: "Comedor común con mesa y seis sillas" },
+  { src: img357572281, alt: "Zona de comedor y salón compartido" },
+  { src: img357572288, alt: "Comedor con vigas de madera y acceso al salón" },
+  { src: img367534576, alt: "Jardín con mesa de piedra y vistas a la iglesia de Aljucén" },
+  { src: img367534587, alt: "Zona de comedor exterior con césped" },
+  { src: img367534599, alt: "Terraza exterior con mesa y bancos de piedra" },
 ];
 
 const rooms = [
