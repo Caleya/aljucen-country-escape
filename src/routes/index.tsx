@@ -319,7 +319,9 @@ function Index() {
               </a>
             ))}
             <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <a href="#contacto">Reservar</a>
+              <a href={PHONE_HREF}>
+                <Phone className="mr-1.5 h-4 w-4" /> {PHONE_DISPLAY}
+              </a>
             </Button>
           </nav>
 
@@ -346,8 +348,8 @@ function Index() {
                 </a>
               ))}
               <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                <a href="#contacto" onClick={() => setMobileMenuOpen(false)}>
-                  Reservar
+                <a href={PHONE_HREF} onClick={() => setMobileMenuOpen(false)}>
+                  <Phone className="mr-2 h-4 w-4" /> Llamar {PHONE_DISPLAY}
                 </a>
               </Button>
             </nav>
