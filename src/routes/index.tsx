@@ -963,6 +963,15 @@ function Index() {
               <p className="mt-2 text-sm text-muted-foreground">
                 9 Calle San Andrés, 06894 Aljucén, Extremadura
               </p>
+              <p className="mt-2 text-sm">
+                <a href={PHONE_HREF} className="font-semibold text-primary hover:underline">
+                  {PHONE_DISPLAY}
+                </a>
+                <span className="text-muted-foreground"> · </span>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-primary">
+                  {CONTACT_EMAIL}
+                </a>
+              </p>
             </div>
             <div className="flex gap-6">
               <a href="#casa" className="text-sm text-muted-foreground hover:text-primary">
@@ -971,6 +980,9 @@ function Index() {
               <a href="#habitaciones" className="text-sm text-muted-foreground hover:text-primary">
                 Habitaciones
               </a>
+              <a href="#reservar" className="text-sm text-muted-foreground hover:text-primary">
+                Reservar
+              </a>
               <a href="#contacto" className="text-sm text-muted-foreground hover:text-primary">
                 Contacto
               </a>
@@ -978,7 +990,7 @@ function Index() {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-primary"
+                className="text-sm text-muted-foreground/70 hover:text-primary"
               >
                 Booking.com
               </a>
