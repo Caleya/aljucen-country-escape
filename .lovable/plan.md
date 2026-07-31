@@ -1,32 +1,29 @@
-## Objetivo
-1. Que las fotos de las habitaciones sean pinchables y abran una galería emergente con más fotos reales.
-2. Añadir un botón/enlace a Booking en la sección "¿Hablamos?".
+# Mejoras: contacto, formulario de reserva y zonas comunes
 
-## 1. Fotos reales subidas
-Subir las 9 fotos aportadas a almacenamiento CDN (Lovable Assets) y repartirlas por habitación:
+## 1. Datos de contacto actualizados
+- Teléfono: **691 231 248** (`tel:+34691231248`) en la sección de contacto, en el pie y en el hero.
+- WhatsApp: mismo número (`https://wa.me/34691231248`).
+- Email: **casarurallaplata@gmail.com** (`mailto:`) en contacto, pie y datos estructurados JSON-LD.
 
-- **Doble Grande**: salón-comedor con vigas, salón con TV, comedor con mesa.
-- **Doble con balcón**: cocina-salón, baño blanco con ducha, baño con lavabo y espejo.
-- **Doble con vistas**: dormitorio de dos camas, baño verde/turquesa, terraza con césped y vistas a la iglesia.
+## 2. Prioridad visual: "Llamar ahora" por encima de Booking
+- El botón **Llamar ahora** pasa a ser el CTA principal: tamaño grande, color primario (terracota), icono de teléfono, y colocado primero en hero y en "¿Hablamos?".
+- Se añade un texto corto tipo "Reserva directa por teléfono: mejor precio y disponibilidad".
+- El botón de Booking se mantiene pero como enlace secundario discreto (estilo `outline`/enlace, tamaño menor), tanto en contacto como en el pie.
 
-La foto principal de cada tarjeta pasará a ser una foto real (dormitorio, salón, terraza) en lugar del placeholder generado. El resto de placeholders (hero, entorno) se mantienen hasta que envíes más fotos.
+## 3. Formulario de solicitud de reserva
+Nueva sección con formulario (validación con zod, mensajes en español):
+- Al enviar se genera un **PDF** con los datos, descargable al instante.
+- A la vez se abre el correo del usuario con destinatario casarurallaplata@gmail.com, asunto y cuerpo ya rellenados, para que solo tenga que adjuntar el PDF y darle a enviar.
+- Sin backend ni base de datos (opción elegida). Si más adelante quieres envío 100% automático sin abrir el correo, se puede añadir con Lovable Cloud y un dominio de email propio.
 
-## 2. Galería emergente (lightbox)
-- Cada tarjeta de habitación se vuelve pinchable (cursor, overlay con icono de lupa y texto "Ver fotos", accesible por teclado).
-- Al pinchar se abre un `Dialog` con:
-  - Carrusel de las fotos de esa habitación (flechas y puntos de navegación, swipe en móvil).
-  - Título de la habitación, metros y lista de comodidades.
-  - Botón de cierre y cierre con tecla Esc.
-- Componente nuevo `src/components/RoomGalleryDialog.tsx` usando `dialog` y `carousel` de shadcn ya presentes en el proyecto.
+**Campos:** pendiente de la imagen `.jpg` con el formulario que quieres replicar. Adjúntala en el chat (botón +) y monto los campos exactamente igual. Si prefieres no esperar, arranco con: nombre, teléfono, email, fecha de entrada, fecha de salida, nº de personas, habitación de interés y observaciones.
 
-## 3. Enlace a Booking
-- En la sección "¿Hablamos?" (`#contacto`), junto a teléfono / email / WhatsApp, añadir una tarjeta-botón "Reservar en Booking.com" que abra la URL indicada en pestaña nueva (`target="_blank" rel="noopener noreferrer"`).
-- Añadir también el mismo enlace en el pie de página.
+## 4. Apartado "Zonas comunes"
+- Nueva sección entre "Habitaciones" y "Servicios" con una galería (mismo estilo de lightbox que las habitaciones) para las zonas compartidas por las 3 habitaciones: salón, cocina, comedor y terraza.
+- De partida se reutilizan las fotos ya subidas de salón, cocina, comedor y terraza; cuando me pases las fotos específicas de zonas comunes las sustituyo/añado.
 
 ## Técnica
-- Fotos vía `lovable-assets` (punteros `.asset.json` en `src/assets/`), importados y usados por URL.
-- Estructura de datos `rooms` ampliada con un array `photos` por habitación.
-- Sin backend ni base de datos.
-- Verificación con build y captura de pantalla del diálogo abierto.
-
-Cuando me pases más fotos, las añado a las galerías correspondientes.
+- Generación de PDF en cliente con `jspdf` (nueva dependencia ligera).
+- Formulario con `react-hook-form` + `zod` y componentes shadcn ya presentes.
+- Fotos nuevas vía `lovable-assets`.
+- Verificación con build y captura de pantalla del formulario y del PDF generado.
