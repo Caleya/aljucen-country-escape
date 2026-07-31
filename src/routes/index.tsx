@@ -548,6 +548,63 @@ function Index() {
       </section>
 
       {/* Servicios */}
+      {/* Zonas comunes */}
+      <section id="zonas-comunes" className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">Compartir</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              Zonas comunes de la casa
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Salón, cocina, comedor, jardín y terraza: espacios compartidos por las tres habitaciones para que
+              te sientas como en casa.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {commonAreaPhotos.map((photo, index) => (
+              <button
+                key={photo.src}
+                type="button"
+                onClick={() => setCommonAreasOpen(true)}
+                aria-label={`Ver galería de zonas comunes: ${photo.alt}`}
+                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={1024}
+                  height={768}
+                  loading="lazy"
+                />
+                <span className="absolute inset-0 flex items-center justify-center bg-foreground/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <span className="flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-semibold text-foreground">
+                    <Expand className="h-4 w-4" /> Ver fotos
+                  </span>
+                </span>
+                {index === 0 && (
+                  <span className="absolute bottom-3 right-3 rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
+                    {commonAreaPhotos.length} fotos
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          <RoomGalleryDialog
+            open={commonAreasOpen}
+            onOpenChange={setCommonAreasOpen}
+            title="Zonas comunes"
+            size="Uso compartido"
+            description="Salón, cocina, comedor, jardín y terraza compartidos por las tres habitaciones."
+            photos={commonAreaPhotos}
+          />
+        </div>
+      </section>
+
+      {/* Servicios */}
       <section id="servicios" className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
