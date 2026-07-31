@@ -783,6 +783,30 @@ function Index() {
         </div>
       </section>
 
+      {/* Solicitud de reserva */}
+      <section id="reservar" className="py-20 sm:py-28">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 text-center">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">Reserva directa</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              Solicita tu reserva
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Rellena el formulario y te generamos un PDF con tu solicitud, listo para enviárnoslo por correo.
+              ¿Prefieres hablarlo? Llámanos al{" "}
+              <a href={PHONE_HREF} className="font-semibold text-primary hover:underline">
+                {PHONE_DISPLAY}
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
+            <ReservationForm />
+          </div>
+        </div>
+      </section>
+
       {/* Contacto */}
       <section id="contacto" className="bg-primary py-20 text-primary-foreground sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
