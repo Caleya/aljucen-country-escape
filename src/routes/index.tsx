@@ -75,6 +75,7 @@ import imgIglesiaAljucen from "@/assets/iglesiaAljucen.jpg";
 import imgSalonInterior from "@/assets/salon-interior.jpg";
 import imgTerrazaJardin from "@/assets/terraza-jardin.jpg";
 import { RoomGalleryDialog } from "@/components/RoomGalleryDialog";
+import { ReservationForm, CONTACT_EMAIL } from "@/components/ReservationForm";
 import foto01 from "@/assets/foto-01.asset.json";
 import foto02 from "@/assets/foto-02.asset.json";
 import foto03 from "@/assets/foto-03.asset.json";
@@ -104,6 +105,10 @@ import foto26 from "@/assets/foto-26.asset.json";
 
 const BOOKING_URL =
   "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
+
+const PHONE_DISPLAY = "691 231 248";
+const PHONE_HREF = "tel:+34691231248";
+const WHATSAPP_HREF = "https://wa.me/34691231248";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -156,8 +161,8 @@ export const Route = createFileRoute("/")({
             postalCode: "06894",
             addressCountry: "ES",
           },
-          telephone: "+34000000000",
-          email: "reservas@casarurallaplata.com",
+          telephone: "+34691231248",
+          email: "casarurallaplata@gmail.com",
           priceRange: "€€",
           aggregateRating: {
             "@type": "AggregateRating",
@@ -182,9 +187,22 @@ const navLinks = [
   { label: "Inicio", href: "#inicio" },
   { label: "La casa", href: "#casa" },
   { label: "Habitaciones", href: "#habitaciones" },
+  { label: "Zonas comunes", href: "#zonas-comunes" },
   { label: "Servicios", href: "#servicios" },
   { label: "Entorno", href: "#entorno" },
   { label: "Contacto", href: "#contacto" },
+];
+
+const commonAreaPhotos = [
+  { src: img357572277, alt: "Salón común con sofá y televisión" },
+  { src: img357572260, alt: "Salón-comedor con vigas de madera y cocina al fondo" },
+  { src: img357572272, alt: "Cocina compartida totalmente equipada" },
+  { src: img357572268, alt: "Comedor común con mesa y seis sillas" },
+  { src: img357572281, alt: "Zona de comedor y salón compartido" },
+  { src: img357572288, alt: "Comedor con vigas de madera y acceso al salón" },
+  { src: img367534576, alt: "Jardín con mesa de piedra y vistas a la iglesia de Aljucén" },
+  { src: img367534587, alt: "Zona de comedor exterior con césped" },
+  { src: img367534599, alt: "Terraza exterior con mesa y bancos de piedra" },
 ];
 
 const rooms = [
@@ -280,6 +298,7 @@ const testimonials = [
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeRoom, setActiveRoom] = useState<string | null>(null);
+  const [commonAreasOpen, setCommonAreasOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -301,7 +320,9 @@ function Index() {
               </a>
             ))}
             <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <a href="#contacto">Reservar</a>
+              <a href={PHONE_HREF}>
+                <Phone className="mr-1.5 h-4 w-4" /> {PHONE_DISPLAY}
+              </a>
             </Button>
           </nav>
 
@@ -328,8 +349,8 @@ function Index() {
                 </a>
               ))}
               <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                <a href="#contacto" onClick={() => setMobileMenuOpen(false)}>
-                  Reservar
+                <a href={PHONE_HREF} onClick={() => setMobileMenuOpen(false)}>
+                  <Phone className="mr-2 h-4 w-4" /> Llamar {PHONE_DISPLAY}
                 </a>
               </Button>
             </nav>
@@ -373,10 +394,10 @@ function Index() {
             <Button
               asChild
               size="lg"
-              className="bg-primary px-8 text-lg text-primary-foreground hover:bg-primary/90"
+              className="bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90"
             >
-              <a href="#contacto">
-                Reservar ahora <ArrowRight className="ml-2 h-5 w-5" />
+              <a href={PHONE_HREF}>
+                <Phone className="mr-2 h-5 w-5" /> Llamar ahora · {PHONE_DISPLAY}
               </a>
             </Button>
             <Button
@@ -385,9 +406,14 @@ function Index() {
               size="lg"
               className="border-white/30 bg-white/10 px-8 text-lg text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
             >
-              <a href="#casa">Conocer la casa</a>
+              <a href="#reservar">
+                Solicitar reserva <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
             </Button>
           </div>
+          <p className="mt-4 text-sm text-white/80">
+            Reserva directa por teléfono: mejor precio y disponibilidad real.
+          </p>
         </div>
       </section>
 
@@ -519,6 +545,63 @@ function Index() {
               photos={room.photos}
             />
           ))}
+        </div>
+      </section>
+
+      {/* Servicios */}
+      {/* Zonas comunes */}
+      <section id="zonas-comunes" className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">Compartir</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              Zonas comunes de la casa
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Salón, cocina, comedor, jardín y terraza: espacios compartidos por las tres habitaciones para que
+              te sientas como en casa.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {commonAreaPhotos.map((photo, index) => (
+              <button
+                key={photo.src}
+                type="button"
+                onClick={() => setCommonAreasOpen(true)}
+                aria-label={`Ver galería de zonas comunes: ${photo.alt}`}
+                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={1024}
+                  height={768}
+                  loading="lazy"
+                />
+                <span className="absolute inset-0 flex items-center justify-center bg-foreground/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <span className="flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-semibold text-foreground">
+                    <Expand className="h-4 w-4" /> Ver fotos
+                  </span>
+                </span>
+                {index === 0 && (
+                  <span className="absolute bottom-3 right-3 rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
+                    {commonAreaPhotos.length} fotos
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          <RoomGalleryDialog
+            open={commonAreasOpen}
+            onOpenChange={setCommonAreasOpen}
+            title="Zonas comunes"
+            size="Uso compartido"
+            description="Salón, cocina, comedor, jardín y terraza compartidos por las tres habitaciones."
+            photos={commonAreaPhotos}
+          />
         </div>
       </section>
 
@@ -700,6 +783,30 @@ function Index() {
         </div>
       </section>
 
+      {/* Solicitud de reserva */}
+      <section id="reservar" className="py-20 sm:py-28">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 text-center">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">Reserva directa</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              Solicita tu reserva
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Rellena el formulario y te generamos un PDF con tu solicitud, listo para enviárnoslo por correo.
+              ¿Prefieres hablarlo? Llámanos al{" "}
+              <a href={PHONE_HREF} className="font-semibold text-primary hover:underline">
+                {PHONE_DISPLAY}
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
+            <ReservationForm />
+          </div>
+        </div>
+      </section>
+
       {/* Contacto */}
       <section id="contacto" className="bg-primary py-20 text-primary-foreground sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -730,8 +837,8 @@ function Index() {
                   </div>
                   <div>
                     <h4 className="font-semibold">Teléfono</h4>
-                    <a href="tel:+34000000000" className="text-primary-foreground/90 hover:underline">
-                      +34 000 000 000
+                    <a href={PHONE_HREF} className="text-lg font-semibold hover:underline">
+                      {PHONE_DISPLAY}
                     </a>
                   </div>
                 </div>
@@ -741,11 +848,8 @@ function Index() {
                   </div>
                   <div>
                     <h4 className="font-semibold">Email</h4>
-                    <a
-                      href="mailto:reservas@casarurallaplata.com"
-                      className="text-primary-foreground/90 hover:underline"
-                    >
-                      reservas@casarurallaplata.com
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary-foreground/90 hover:underline">
+                      {CONTACT_EMAIL}
                     </a>
                   </div>
                 </div>
@@ -761,36 +865,49 @@ function Index() {
                 </div>
               </div>
 
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-10 space-y-4">
                 <Button
                   asChild
                   size="lg"
-                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                  className="w-full bg-primary-foreground py-7 text-lg font-bold text-primary shadow-lg hover:bg-primary-foreground/90 sm:w-auto sm:px-10"
                 >
-                  <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                    <CalendarCheck className="mr-2 h-5 w-5" /> Reservar en Booking.com
+                  <a href={PHONE_HREF}>
+                    <Phone className="mr-2 h-6 w-6" /> Llamar ahora · {PHONE_DISPLAY}
                   </a>
                 </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                <p className="text-sm text-primary-foreground/80">
+                  Reserva directa por teléfono: mejor precio, sin comisiones y disponibilidad al momento.
+                </p>
+                <div className="flex flex-col gap-4 sm:flex-row">
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                  >
+                    <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
+                    </a>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                  >
+                    <a href="#reservar">
+                      <CalendarCheck className="mr-2 h-5 w-5" /> Formulario de reserva
+                    </a>
+                  </Button>
+                </div>
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-primary-foreground/70 underline underline-offset-4 hover:text-primary-foreground"
                 >
-                  <a href="tel:+34000000000">
-                    <Phone className="mr-2 h-5 w-5" /> Llamar ahora
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-                >
-                  <a href="https://wa.me/34000000000" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp
-                  </a>
-                </Button>
+                  O reservar en Booking.com <ExternalLink className="h-3.5 w-3.5" />
+                </a>
               </div>
             </div>
 
@@ -819,12 +936,18 @@ function Index() {
                 </div>
               </div>
               <a
+                href={PHONE_HREF}
+                className="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-foreground px-5 py-4 text-lg font-bold text-primary transition-opacity hover:opacity-90"
+              >
+                <Phone className="h-5 w-5" /> Llamar al {PHONE_DISPLAY}
+              </a>
+              <a
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 flex items-center justify-center gap-2 rounded-xl bg-primary-foreground px-5 py-3 font-semibold text-primary transition-opacity hover:opacity-90"
+                className="mt-4 flex items-center justify-center gap-1.5 text-sm text-primary-foreground/70 underline underline-offset-4 hover:text-primary-foreground"
               >
-                Ver disponibilidad en Booking.com <ExternalLink className="h-4 w-4" />
+                Ver disponibilidad en Booking.com <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
@@ -840,6 +963,15 @@ function Index() {
               <p className="mt-2 text-sm text-muted-foreground">
                 9 Calle San Andrés, 06894 Aljucén, Extremadura
               </p>
+              <p className="mt-2 text-sm">
+                <a href={PHONE_HREF} className="font-semibold text-primary hover:underline">
+                  {PHONE_DISPLAY}
+                </a>
+                <span className="text-muted-foreground"> · </span>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-primary">
+                  {CONTACT_EMAIL}
+                </a>
+              </p>
             </div>
             <div className="flex gap-6">
               <a href="#casa" className="text-sm text-muted-foreground hover:text-primary">
@@ -848,6 +980,9 @@ function Index() {
               <a href="#habitaciones" className="text-sm text-muted-foreground hover:text-primary">
                 Habitaciones
               </a>
+              <a href="#reservar" className="text-sm text-muted-foreground hover:text-primary">
+                Reservar
+              </a>
               <a href="#contacto" className="text-sm text-muted-foreground hover:text-primary">
                 Contacto
               </a>
@@ -855,7 +990,7 @@ function Index() {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-primary"
+                className="text-sm text-muted-foreground/70 hover:text-primary"
               >
                 Booking.com
               </a>
