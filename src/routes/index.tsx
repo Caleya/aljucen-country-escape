@@ -298,6 +298,7 @@ const testimonials = [
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeRoom, setActiveRoom] = useState<string | null>(null);
+  const [commonAreasOpen, setCommonAreasOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
