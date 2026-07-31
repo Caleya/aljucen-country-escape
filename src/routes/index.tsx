@@ -37,6 +37,9 @@ import { useState } from "react";
 import heroCasa from "@/assets/367534298.jpg";
 import entornoExtremadura from "@/assets/entorno-extremadura.jpg";
 import detalleRustico from "@/assets/detalle-rustico.jpg";
+import dolmenDeLacara from "@/assets/Dolmen_de_Lácara_.jpg";
+import dolmenDeLacaraNoche from "@/assets/dolmenDeLacaraNoche.jpg";
+import presaRomanaParqueDeCornalvo from "@/assets/Torre_de_la_presa_romana_de_Cornalvo,_Extremadura.jpg";
 import img357572260 from "@/assets/357572260.jpg";
 import img357572268 from "@/assets/357572268.jpg";
 import img357572272 from "@/assets/357572272.jpg";
@@ -106,7 +109,7 @@ import foto26 from "@/assets/foto-26.asset.json";
 const BOOKING_URL =
   "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
 
-const PHONE_DISPLAY = "691 231 248";
+const PHONE_DISPLAY = "691 23 12 48";
 const PHONE_HREF = "tel:+34691231248";
 const WHATSAPP_HREF = "https://wa.me/34691231248";
 
@@ -407,12 +410,12 @@ function Index() {
               className="border-white/30 bg-white/10 px-8 text-lg text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
             >
               <a href="#reservar">
-                Solicitar reserva <ArrowRight className="ml-2 h-5 w-5" />
+                Formulario de reserva <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
           </div>
           <p className="mt-4 text-sm text-white/80">
-            Reserva directa por teléfono: mejor precio y disponibilidad real.
+            Reserva directa por teléfono: Rápida y sin preocupaciones.
           </p>
         </div>
       </section>
@@ -445,7 +448,7 @@ function Index() {
               </p>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
                 Ubicada en el centro del pueblo de Aljucén, a solo 15 minutos de Mérida, es el punto de partida
-                ideal para descubrir la naturaleza y la gastronomía de la zona (MÁS OCIO?).
+                ideal para descubrir la naturaleza y la gastronomía de la zona.
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -712,9 +715,18 @@ function Index() {
                 <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
                   <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                   <div>
-                    <h4 className="font-semibold">Rutas de senderismo</h4>
+                    <h4 className="font-semibold">Dolmenes de Lácara</h4>
                     <p className="text-sm text-muted-foreground">
-                      Kilometros de caminos rurales para disfrutar del paisaje extremeño.
+                      Un monumento de piedra de la prehistoria, considerado uno de los sepulcros más grandes de la península ibérica.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
+                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
+                  <div>
+                    <h4 className="font-semibold">Parque de Cornalvo a minutos</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Un espacio natural protegido que destaca por albergar la histórica presa romana de Cornalvo.
                     </p>
                   </div>
                 </div>
@@ -789,11 +801,14 @@ function Index() {
           <div className="mb-10 text-center">
             <span className="text-sm font-semibold uppercase tracking-wider text-primary">Reserva directa</span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
-              Solicita tu reserva
+              Formulario de reserva
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              <h2 className="mt-3 font-serif text-2xl font-bold text-foreground sm:text-2xl">
+              Obligatorio rellenar todos los campos y enviar después de concretar fecha de reserva por télefono.
+              </h2>
               Rellena el formulario y te generamos un PDF con tu solicitud, listo para enviárnoslo por correo.
-              ¿Prefieres hablarlo? Llámanos al{" "}
+              ¿Algún problema? Llámanos al{" "}
               <a href={PHONE_HREF} className="font-semibold text-primary hover:underline">
                 {PHONE_DISPLAY}
               </a>
@@ -876,7 +891,7 @@ function Index() {
                   </a>
                 </Button>
                 <p className="text-sm text-primary-foreground/80">
-                  Reserva directa por teléfono: mejor precio, sin comisiones y disponibilidad al momento.
+                  Reserva directa por teléfono: Rápida y sin preocupaciones.
                 </p>
                 <div className="flex flex-col gap-4 sm:flex-row">
                   <Button
