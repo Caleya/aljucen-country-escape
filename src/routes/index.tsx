@@ -841,11 +841,13 @@ function Index() {
             <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
               Formulario de reserva
             </h2>
+            <p className="mx-auto mt-4 max-w-2xl font-serif text-xl font-bold text-foreground">
+              Obligatorio rellenar todos los campos y enviar después de concretar fecha de reserva por
+              teléfono.
+            </p>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              <h2 className="mt-3 font-serif text-2xl font-bold text-foreground sm:text-2xl">
-              Obligatorio rellenar todos los campos y enviar después de concretar fecha de reserva por télefono.
-              </h2>
-              Rellena el formulario y te generamos un PDF con tu solicitud, listo para enviárnoslo por correo.
+              Rellena el formulario y te generamos un PDF del parte de entrada de viajeros, listo para
+              enviárnoslo por correo.
               ¿Algún problema? Llámanos al{" "}
               <a href={PHONE_HREF} className="font-semibold text-primary hover:underline">
                 {PHONE_DISPLAY}
