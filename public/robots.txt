@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aljucen-country-escape.lovable.app/sitemap.xml
+Sitemap: https://casa-rural-la-plata.lovable.app/sitemap.xml
