@@ -471,10 +471,8 @@ export function ReservationForm() {
       <Section title="Datos de la reserva">
         {field("referencia", "Referencia")}
         {field("fechaContrato", "Fecha del contrato", { type: "date" })}
-        <div className="grid grid-cols-2 gap-4">
-          {field("entrada", "Fecha de entrada", { type: "date" })}
-          {field("salida", "Fecha de salida", { type: "date" })}
-        </div>
+        {field("entrada", "Fecha de entrada", { type: "date" })}
+        {field("salida", "Fecha de salida", { type: "date" })}
         {field("personas", "Número de personas", { type: "number" })}
         {field("habitaciones", "Número de habitaciones", { type: "number" })}
       </Section>
