@@ -164,7 +164,8 @@ async function buildPdf(v: FormValues) {
   const sello = await loadSello();
   if (sello) {
     try {
-      doc.addImage(sello, "PNG", right - 96, 34, 96, 118);
+      doc.addImage(sello, "PNG", right - 78, 30, 78, 96);
+      y = Math.max(y, 138);
     } catch {
       /* sello opcional */
     }
@@ -283,6 +284,24 @@ async function buildPdf(v: FormValues) {
     doc.text(notes, left, y);
     y += notes.length * 13;
   }
+
+  pageBreak(90);
+  y += 24;
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.text("Firma del titular:", left, y);
+  doc.text("Fecha:", left + 300, y);
+  doc.setDrawColor(30);
+  doc.line(left + 80, y + 2, left + 260, y + 2);
+  doc.line(left + 340, y + 2, right, y + 2);
+  y += 34;
+  doc.setFontSize(8);
+  doc.setTextColor(120);
+  const legal = doc.splitTextToSize(
+    "Los datos recogidos en este parte de entrada de viajeros se tratan conforme a la normativa vigente de registro documental de viajeros y solo se comunican a las autoridades competentes.",
+    width,
+  ) as string[];
+  doc.text(legal, left, y);
 
   return doc;
 }
