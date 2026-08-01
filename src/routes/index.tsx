@@ -36,6 +36,12 @@ import { useState } from "react";
 
 import heroCasa from "@/assets/367534298.jpg";
 import entornoExtremadura from "@/assets/entorno-extremadura.jpg";
+import actMerida from "@/assets/act-merida.jpg";
+import actDolmenes from "@/assets/act-dolmenes.jpg";
+import actCornalvo from "@/assets/act-cornalvo.jpg";
+import actSenderismo from "@/assets/act-senderismo.jpg";
+import actCaceres from "@/assets/act-caceres.jpg";
+import actAeropuerto from "@/assets/act-aeropuerto.jpg";
 import detalleRustico from "@/assets/detalle-rustico.jpg";
 import dolmenDeLacara from "@/assets/Dolmen_de_Lácara_.jpg";
 import dolmenDeLacaraNoche from "@/assets/dolmenDeLacaraNoche.jpg";
@@ -111,6 +117,46 @@ const BOOKING_URL =
 
 const PHONE_DISPLAY = "691 23 12 48";
 const PHONE_HREF = "tel:+34691231248";
+
+const DISCOVER_ITEMS = [
+  {
+    title: "Mérida, a 15 km",
+    text: "Teatro y Anfiteatro Romano, Acueducto de los Milagros y la Basílica de Santa Eulalia: el mayor conjunto monumental romano de España.",
+    image: actMerida,
+    alt: "Teatro Romano de Mérida al atardecer",
+  },
+  {
+    title: "Dólmenes de Lácara",
+    text: "Monumento megalítico de la prehistoria, uno de los sepulcros de corredor más grandes de la península ibérica.",
+    image: actDolmenes,
+    alt: "Dolmen de Lácara entre encinas",
+  },
+  {
+    title: "Parque Natural de Cornalvo",
+    text: "Espacio natural protegido a pocos minutos, con la histórica presa romana de Cornalvo y dehesa para perderse.",
+    image: actCornalvo,
+    alt: "Embalse y dehesa del Parque Natural de Cornalvo",
+  },
+  {
+    title: "Rutas de senderismo",
+    text: "Etapas del Camino de Santiago Vía de la Plata y senderos por la ribera del Aljucén, la dehesa y Cornalvo, aptos para todos los niveles.",
+    image: actSenderismo,
+    alt: "Sendero señalizado entre encinas en la dehesa extremeña",
+  },
+  {
+    title: "Cáceres y su cuartel",
+    text: "A poco más de una hora, la ciudad monumental Patrimonio de la Humanidad y el acuartelamiento de Cáceres, ideal para visitas y jornadas de familiares.",
+    image: actCaceres,
+    alt: "Plaza Mayor y murallas de Cáceres",
+  },
+  {
+    title: "Aeropuerto de Badajoz, 59 km",
+    text: "Bien comunicados por la A-66 y la N-630 para viajeros que llegan de fuera de Extremadura.",
+    image: actAeropuerto,
+    alt: "Carretera extremeña hacia el aeropuerto de Badajoz",
+  },
+];
+
 const WHATSAPP_HREF = "https://wa.me/34691231248";
 
 export const Route = createFileRoute("/")({
@@ -689,57 +735,59 @@ function Index() {
       {/* Ubicación */}
       <section id="entorno" className="bg-muted/50 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary">Descubre</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+              Aljucén y su entorno
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              Aljucén es un tranquilo pueblo extremeño, perfecto para explorar la zona. Su ubicación
+              estratégica te permite disfrutar tanto del patrimonio histórico como de la naturaleza
+              extremeña.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {DISCOVER_ITEMS.map((item) => (
+              <article
+                key={item.title}
+                className="overflow-hidden rounded-2xl bg-background shadow-sm transition-shadow hover:shadow-lg"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-start gap-2">
+                    <MapPin className="mt-1 h-4 w-4 flex-shrink-0 text-primary" />
+                    <h3 className="font-serif text-lg font-semibold text-foreground">{item.title}</h3>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-12 grid items-center gap-10 lg:grid-cols-2">
+            <img
+              src={imgIglesiaAljucen}
+              alt="Iglesia de Aljucén y su entorno"
+              className="rounded-2xl shadow-xl"
+              width={1280}
+              height={720}
+              loading="lazy"
+            />
             <div>
-              <span className="text-sm font-semibold uppercase tracking-wider text-primary">Descubre</span>
-              <h2 className="mt-3 font-serif text-3 xl font-bold text-foreground sm:text-4xl">
-                Aljucén y su entorno
-              </h2>
-              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Aljucén es un tranquilo pueblo extremeño, perfecto para explorar la zona. Su
-                ubicación estratégica te permite disfrutar tanto del patrimonio histórico como de la naturaleza
-                de extremeña.
+              <h3 className="font-serif text-2xl font-bold text-foreground">¿Dónde estamos?</h3>
+              <p className="mt-3 text-muted-foreground">
+                9 Calle San Andrés, 06894 Aljucén (Badajoz). A un paso del Camino de Santiago Vía de la
+                Plata y del Parque Natural de Cornalvo.
               </p>
-
-              <div className="mt-8 space-y-4">
-                <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
-                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                  <div>
-                    <h4 className="font-semibold">A 15 km de Mérida y de su Teatro Romano</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Acueducto de los Milagros, Basílica de Santa Eulalia y el impresionante conjunto
-                      monumental romano.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
-                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                  <div>
-                    <h4 className="font-semibold">Dolmenes de Lácara</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Un monumento de piedra de la prehistoria, considerado uno de los sepulcros más grandes de la península ibérica.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
-                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                  <div>
-                    <h4 className="font-semibold">Parque de Cornalvo a minutos</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Un espacio natural protegido que destaca por albergar la histórica presa romana de Cornalvo.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 rounded-xl bg-background p-4 shadow-sm">
-                  <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                  <div>
-                    <h4 className="font-semibold">A 59 km del aeropuerto de Badajoz</h4>
-                    <p className="text-sm text-muted-foreground">Bien comunicado para viajeros de fuera.</p>
-                  </div>
-                </div>
-              </div>
-
-              <Button asChild size="lg" className="mt-8">
+              <Button asChild size="lg" className="mt-6">
                 <a
                   href="https://www.google.com/maps/place/Casa+rural+la+plata/@39.043433,-6.3329939,17z/data=!3m1!4b1!4m6!3m5!1s0xd1429e6f81d19ff:0xe194858a42ad8828!8m2!3d39.043433!4d-6.330419!16s%2Fg%2F11t0m51xtq"
                   target="_blank"
@@ -749,16 +797,6 @@ function Index() {
                   Ver ubicación en Google Maps
                 </a>
               </Button>
-            </div>
-            <div>
-              <img
-                src={imgIglesiaAljucen}
-                alt="Paisaje de la dehesa extremeña cerca de Aljucén"
-                className="rounded-2xl shadow-xl"
-                width={1280}
-                height={720}
-                loading="lazy"
-              />
             </div>
           </div>
         </div>
