@@ -81,6 +81,15 @@ function formatDate(value?: string) {
   return d && m && y ? `${d}/${m}/${y}` : value;
 }
 
+/* ---------- COMPONENTES Y HELPERS (FUERA DEL COMPONENTE PRINCIPAL) ---------- */
+
+const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
+  <fieldset className="rounded-xl border border-border p-4 sm:p-5">
+    <legend className="px-2 font-serif text-lg font-semibold text-foreground">{title}</legend>
+    <div className="grid gap-4 sm:grid-cols-3">{children}</div>
+  </fieldset>
+);
+
 /* ---------- PDF ---------- */
 
 type Cell = { label: string; value: string; span?: number };
@@ -328,7 +337,7 @@ function buildMailto(v: FormValues) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-/* ---------- Componente ---------- */
+/* ---------- COMPONENTE PRINCIPAL ---------- */
 
 const TITULAR_TO_VIAJERO: Array<[FieldName, FieldName]> = [
   ["tNombre", "vNombre"],
@@ -413,12 +422,12 @@ export function ReservationForm() {
     setMailHref(buildMailto(result.data));
   };
 
-  const field = (
+  const renderField = (
     name: FieldName,
     label: string,
     options?: { type?: string; className?: string; placeholder?: string; disabled?: boolean },
   ) => (
-    <div className={options?.className}>
+    <div key={name} className={options?.className}>
       <Label htmlFor={name}>{label}</Label>
       <Input
         id={name}
@@ -434,8 +443,8 @@ export function ReservationForm() {
     </div>
   );
 
-  const select = (name: FieldName, label: string, opts: string[], disabled?: boolean) => (
-    <div>
+  const renderSelect = (name: FieldName, label: string, opts: string[], disabled?: boolean) => (
+    <div key={name}>
       <Label htmlFor={name}>{label}</Label>
       <select
         id={name}
@@ -455,13 +464,6 @@ export function ReservationForm() {
     </div>
   );
 
-  const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <fieldset className="rounded-xl border border-border p-4 sm:p-5">
-      <legend className="px-2 font-serif text-lg font-semibold text-foreground">{title}</legend>
-      <div className="grid gap-4 sm:grid-cols-3">{children}</div>
-    </fieldset>
-  );
-
   const docTypes = ["DNI", "NIE", "Pasaporte", "Permiso de conducir", "Otro"];
   const sexes = ["Mujer", "Hombre", "Otro"];
   const payTypes = ["Efectivo", "Tarjeta", "Transferencia", "Plataforma de pago", "Otro"];
@@ -469,43 +471,43 @@ export function ReservationForm() {
   return (
     <form id="formulario-reserva" onSubmit={handleSubmit} className="space-y-6" noValidate>
       <Section title="Datos de la reserva">
-        {field("referencia", "Referencia")}
-        {field("fechaContrato", "Fecha del contrato", { type: "date" })}
-        {field("entrada", "Fecha de entrada", { type: "date" })}
-        {field("salida", "Fecha de salida", { type: "date" })}
-        {field("personas", "Número de personas", { type: "number" })}
-        {field("habitaciones", "Número de habitaciones", { type: "number" })}
+        {renderField("referencia", "Referencia")}
+        {renderField("fechaContrato", "Fecha del contrato", { type: "date" })}
+        {renderField("entrada", "Fecha de entrada", { type: "date" })}
+        {renderField("salida", "Fecha de salida", { type: "date" })}
+        {renderField("personas", "Número de personas", { type: "number" })}
+        {renderField("habitaciones", "Número de habitaciones", { type: "number" })}
       </Section>
 
       <Section title="Información del pago">
-        {select("tipoPago", "Tipo de pago", payTypes)}
-        {field("medioPago", "Medios de pago")}
-        {field("titularPago", "Titular del pago")}
-        {field("fechaPago", "Fecha de pago", { type: "date" })}
+        {renderSelect("tipoPago", "Tipo de pago", payTypes)}
+        {renderField("medioPago", "Medios de pago")}
+        {renderField("titularPago", "Titular del pago")}
+        {renderField("fechaPago", "Fecha de pago", { type: "date" })}
       </Section>
 
       <Section title="Datos del titular">
-        {field("tNombre", "Nombre")}
-        {field("tApellido1", "Primer apellido")}
-        {field("tApellido2", "Segundo apellido")}
-        {field("tNacimiento", "Fecha de nacimiento", { type: "date" })}
-        {field("tNacionalidad", "Nacionalidad")}
-        {select("tSexo", "Sexo", sexes)}
-        {select("tTipoDoc", "Tipo de documento", docTypes)}
-        {field("tDocumento", "Documento")}
-        {field("tSoporteDoc", "Soporte del documento")}
-        {field("tTelefono", "Teléfono", { type: "tel" })}
-        {field("tTelefono2", "Teléfono adicional", { type: "tel" })}
-        {field("tEmail", "Correo electrónico", { type: "email" })}
+        {renderField("tNombre", "Nombre")}
+        {renderField("tApellido1", "Primer apellido")}
+        {renderField("tApellido2", "Segundo apellido")}
+        {renderField("tNacimiento", "Fecha de nacimiento", { type: "date" })}
+        {renderField("tNacionalidad", "Nacionalidad")}
+        {renderSelect("tSexo", "Sexo", sexes)}
+        {renderSelect("tTipoDoc", "Tipo de documento", docTypes)}
+        {renderField("tDocumento", "Documento")}
+        {renderField("tSoporteDoc", "Soporte del documento")}
+        {renderField("tTelefono", "Teléfono", { type: "tel" })}
+        {renderField("tTelefono2", "Teléfono adicional", { type: "tel" })}
+        {renderField("tEmail", "Correo electrónico", { type: "email" })}
       </Section>
 
       <Section title="Dirección del titular">
-        {field("tDireccion", "Dirección")}
-        {field("tDireccion2", "Dirección adicional")}
-        {field("tPais", "País")}
-        {field("tProvincia", "Provincia")}
-        {field("tMunicipio", "Municipio")}
-        {field("tCodigoPostal", "Código postal")}
+        {renderField("tDireccion", "Dirección")}
+        {renderField("tDireccion2", "Dirección adicional")}
+        {renderField("tPais", "País")}
+        {renderField("tProvincia", "Provincia")}
+        {renderField("tMunicipio", "Municipio")}
+        {renderField("tCodigoPostal", "Código postal")}
       </Section>
 
       <label className="flex items-center gap-3 rounded-xl bg-muted p-4 text-sm font-medium">
@@ -519,42 +521,29 @@ export function ReservationForm() {
       </label>
 
       <Section title="Datos del viajero">
-        {field("vNombre", "Nombre", { disabled: sameAsTitular })}
-        {field("vApellido1", "Primer apellido", { disabled: sameAsTitular })}
-        {field("vApellido2", "Segundo apellido", { disabled: sameAsTitular })}
-        {field("vNacimiento", "Fecha de nacimiento", { type: "date", disabled: sameAsTitular })}
-        {field("vNacionalidad", "Nacionalidad", { disabled: sameAsTitular })}
-        {select("vSexo", "Sexo", sexes, sameAsTitular)}
-        {select("vTipoDoc", "Tipo de documento", docTypes, sameAsTitular)}
-        {field("vDocumento", "Documento", { disabled: sameAsTitular })}
-        {field("vSoporteDoc", "Soporte del documento", { disabled: sameAsTitular })}
-        {field("vTelefono", "Teléfono", { type: "tel", disabled: sameAsTitular })}
-        {field("vTelefono2", "Teléfono adicional", { type: "tel", disabled: sameAsTitular })}
-        {field("vEmail", "Correo electrónico", { type: "email", disabled: sameAsTitular })}
-        {field("vParentesco", "Parentesco", { disabled: sameAsTitular })}
+        {renderField("vNombre", "Nombre", { disabled: sameAsTitular })}
+        {renderField("vApellido1", "Primer apellido", { disabled: sameAsTitular })}
+        {renderField("vApellido2", "Segundo apellido", { disabled: sameAsTitular })}
+        {renderField("vNacimiento", "Fecha de nacimiento", { type: "date", disabled: sameAsTitular })}
+        {renderField("vNacionalidad", "Nacionalidad", { disabled: sameAsTitular })}
+        {renderSelect("vSexo", "Sexo", sexes, sameAsTitular)}
+        {renderSelect("vTipoDoc", "Tipo de documento", docTypes, sameAsTitular)}
+        {renderField("vDocumento", "Documento", { disabled: sameAsTitular })}
+        {renderField("vSoporteDoc", "Soporte del documento", { disabled: sameAsTitular })}
+        {renderField("vTelefono", "Teléfono", { type: "tel", disabled: sameAsTitular })}
+        {renderField("vTelefono2", "Teléfono adicional", { type: "tel", disabled: sameAsTitular })}
+        {renderField("vEmail", "Correo electrónico", { type: "email", disabled: sameAsTitular })}
+        {renderField("vParentesco", "Parentesco", { disabled: sameAsTitular })}
       </Section>
 
       <Section title="Dirección del viajero">
-        {field("vDireccion", "Dirección", { disabled: sameAsTitular })}
-        {field("vDireccion2", "Dirección adicional", { disabled: sameAsTitular })}
-        {field("vPais", "País", { disabled: sameAsTitular })}
-        {field("vProvincia", "Provincia", { disabled: sameAsTitular })}
-        {field("vMunicipio", "Municipio", { disabled: sameAsTitular })}
-        {field("vCodigoPostal", "Código postal", { disabled: sameAsTitular })}
+        {renderField("vDireccion", "Dirección", { disabled: sameAsTitular })}
+        {renderField("vDireccion2", "Dirección adicional", { disabled: sameAsTitular })}
+        {renderField("vPais", "País", { disabled: sameAsTitular })}
+        {renderField("vProvincia", "Provincia", { disabled: sameAsTitular })}
+        {renderField("vMunicipio", "Municipio", { disabled: sameAsTitular })}
+        {renderField("vCodigoPostal", "Código postal", { disabled: sameAsTitular })}
       </Section>
-
-      <div>
-        <Label htmlFor="observaciones">Observaciones</Label>
-        <Textarea
-          id="observaciones"
-          rows={4}
-          className="mt-1"
-          value={values.observaciones ?? ""}
-          onChange={(e) => update("observaciones", e.target.value)}
-          placeholder="Hora de llegada aproximada, mascotas, necesidades especiales..."
-          maxLength={1000}
-        />
-      </div>
 
       <Button type="submit" size="lg" className="w-full">
         <Download className="mr-2 h-5 w-5" /> Descargar PDF del parte de entrada
@@ -577,7 +566,7 @@ export function ReservationForm() {
       <p className="flex items-start gap-2 text-sm text-muted-foreground">
         <Mail className="mt-0.5 h-4 w-4 flex-shrink-0" />
         Al enviar se descarga un PDF idéntico al parte de entrada de viajeros, con el sello de la casa.
-        Envíalo a {CONTACT_EMAIL} o tráelo firmado a tu llegada.
+        Envíalo a {CONTACT_EMAIL} o tráelo a tu llegada.
       </p>
     </form>
   );

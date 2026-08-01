@@ -35,17 +35,13 @@ import {
 import { useState } from "react";
 
 import heroCasa from "@/assets/367534298.jpg";
-import entornoExtremadura from "@/assets/entorno-extremadura.jpg";
-import actMerida from "@/assets/act-merida.jpg";
-import actDolmenes from "@/assets/act-dolmenes.jpg";
-import actCornalvo from "@/assets/act-cornalvo.jpg";
 import actSenderismo from "@/assets/act-senderismo.jpg";
 import actCaceres from "@/assets/act-caceres.jpg";
 import actAeropuerto from "@/assets/act-aeropuerto.jpg";
-import detalleRustico from "@/assets/detalle-rustico.jpg";
 import dolmenDeLacara from "@/assets/Dolmen_de_Lácara_.jpg";
 import dolmenDeLacaraNoche from "@/assets/dolmenDeLacaraNoche.jpg";
 import presaRomanaParqueDeCornalvo from "@/assets/Torre_de_la_presa_romana_de_Cornalvo,_Extremadura.jpg";
+import teatroRomanoMerida from "@/assets/Teatro_romano_de_Mérida.jpg";
 import img357572260 from "@/assets/357572260.jpg";
 import img357572268 from "@/assets/357572268.jpg";
 import img357572272 from "@/assets/357572272.jpg";
@@ -79,38 +75,9 @@ import img367534576 from "@/assets/367534576.jpg";
 import img367534587 from "@/assets/367534587.jpg";
 import img367534599 from "@/assets/367534599.jpg";
 import img367534714 from "@/assets/367534714.jpg";
-import imgFoto1 from "@/assets/foto1.jpg";
 import imgIglesiaAljucen from "@/assets/iglesiaAljucen.jpg";
-import imgSalonInterior from "@/assets/salon-interior.jpg";
-import imgTerrazaJardin from "@/assets/terraza-jardin.jpg";
 import { RoomGalleryDialog } from "@/components/RoomGalleryDialog";
 import { ReservationForm, CONTACT_EMAIL } from "@/components/ReservationForm";
-import foto01 from "@/assets/foto-01.asset.json";
-import foto02 from "@/assets/foto-02.asset.json";
-import foto03 from "@/assets/foto-03.asset.json";
-import foto04 from "@/assets/foto-04.asset.json";
-import foto05 from "@/assets/foto-05.asset.json";
-import foto06 from "@/assets/foto-06.asset.json";
-import foto07 from "@/assets/foto-07.asset.json";
-import foto08 from "@/assets/foto-08.asset.json";
-import foto09 from "@/assets/foto-09.asset.json";
-import foto10 from "@/assets/foto-10.asset.json";
-import foto11 from "@/assets/foto-11.asset.json";
-import foto12 from "@/assets/foto-12.asset.json";
-import foto13 from "@/assets/foto-13.asset.json";
-import foto14 from "@/assets/foto-14.asset.json";
-import foto15 from "@/assets/foto-15.asset.json";
-import foto16 from "@/assets/foto-16.asset.json";
-import foto17 from "@/assets/foto-17.asset.json";
-import foto18 from "@/assets/foto-18.asset.json";
-import foto19 from "@/assets/foto-19.asset.json";
-import foto20 from "@/assets/foto-20.asset.json";
-import foto21 from "@/assets/foto-21.asset.json";
-import foto22 from "@/assets/foto-22.asset.json";
-import foto23 from "@/assets/foto-23.asset.json";
-import foto24 from "@/assets/foto-24.asset.json";
-import foto25 from "@/assets/foto-25.asset.json";
-import foto26 from "@/assets/foto-26.asset.json";
 
 const BOOKING_URL =
   "https://www.booking.com/hotel/es/casa-apartamento-la-plata.es.html?aid=356980&label=gog235jc-10CAMoRkIHYWxqdWNlbkgKWANoRogBAZgBM7gBF8gBFdgBA-gBAfgBAYgCAagCAbgCxJeZ0wbAAgHSAiQ3MjY4NDQ5OC00ZDA2LTQ1YWYtYjMxYy1hNjk4ZTllZWVhOGbYAgHgAgE#availability";
@@ -122,19 +89,19 @@ const DISCOVER_ITEMS = [
   {
     title: "Mérida, a 15 km",
     text: "Teatro y Anfiteatro Romano, Acueducto de los Milagros y la Basílica de Santa Eulalia: el mayor conjunto monumental romano de España.",
-    image: actMerida,
+    image: teatroRomanoMerida,
     alt: "Teatro Romano de Mérida al atardecer",
   },
   {
     title: "Dólmenes de Lácara",
     text: "Monumento megalítico de la prehistoria, uno de los sepulcros de corredor más grandes de la península ibérica.",
-    image: actDolmenes,
+    image: dolmenDeLacara,
     alt: "Dolmen de Lácara entre encinas",
   },
   {
     title: "Parque Natural de Cornalvo",
     text: "Espacio natural protegido a pocos minutos, con la histórica presa romana de Cornalvo y dehesa para perderse.",
-    image: actCornalvo,
+    image: presaRomanaParqueDeCornalvo,
     alt: "Embalse y dehesa del Parque Natural de Cornalvo",
   },
   {
