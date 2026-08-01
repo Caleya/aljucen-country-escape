@@ -200,7 +200,7 @@ const commonAreaPhotos = [
   { src: img357572277, alt: "Salón común con sofá y televisión" },
   { src: img357572260, alt: "Salón-comedor con vigas de madera y cocina al fondo" },
   { src: img357572272, alt: "Cocina compartida totalmente equipada" },
-  { src: img357572268, alt: "Comedor común con mesa y seis sillas" },
+  { src: img357572312, alt: "Cocina-salón compartido" },
   { src: img357572281, alt: "Zona de comedor y salón compartido" },
   { src: img357572288, alt: "Comedor con vigas de madera y acceso al salón" },
   { src: img367534576, alt: "Jardín con mesa de piedra y vistas a la iglesia de Aljucén" },
