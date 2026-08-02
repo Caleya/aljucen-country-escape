@@ -99,11 +99,30 @@ async function loadSello(): Promise<string | null> {
     const res = await fetch(selloAsset.url);
     if (!res.ok) return null;
     const blob = await res.blob();
+    const objectUrl = URL.createObjectURL(blob);
     return await new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(String(reader.result));
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
+      const image = new Image();
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        const context = canvas.getContext("2d");
+        if (!context) {
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error("No se pudo preparar el sello"));
+          return;
+        }
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0);
+        URL.revokeObjectURL(objectUrl);
+        resolve(canvas.toDataURL("image/jpeg", 0.92));
+      };
+      image.onerror = () => {
+        URL.revokeObjectURL(objectUrl);
+        reject(new Error("No se pudo cargar el sello"));
+      };
+      image.src = objectUrl;
     });
   } catch {
     return null;
@@ -115,12 +134,12 @@ async function buildPdf(v: FormValues) {
   const left = 42;
   const right = 553;
   const width = right - left;
-  let y = 52;
+  let y = 44;
 
   const pageBreak = (needed: number) => {
     if (y + needed > 800) {
       doc.addPage();
-      y = 52;
+      y = 44;
     }
   };
 
@@ -130,51 +149,47 @@ async function buildPdf(v: FormValues) {
     doc.setFontSize(11);
     doc.setTextColor(20);
     doc.text(text, left, y);
-    y += 8;
+    y += 18;
   };
 
   const table = (rows: Cell[][]) => {
     rows.forEach((row) => {
-      pageBreak(46);
       const cols = row.reduce((sum, c) => sum + (c.span ?? 1), 0);
       const unit = width / cols;
+      const prepared = row.map((cell) => {
+        const cellWidth = unit * (cell.span ?? 1);
+        const lines = doc.splitTextToSize(cell.value || "", cellWidth - 8) as string[];
+        return { ...cell, cellWidth, lines };
+      });
+      const valueHeight = Math.max(20, ...prepared.map((cell) => Math.max(1, cell.lines.length) * 11 + 8));
+      const rowHeight = 18 + valueHeight;
+      pageBreak(rowHeight + 4);
       let x = left;
       doc.setDrawColor(30);
       doc.setLineWidth(0.7);
-      row.forEach((cell) => {
-        const w = unit * (cell.span ?? 1);
-        doc.rect(x, y, w, 18);
-        doc.rect(x, y + 18, w, 20);
+      prepared.forEach((cell) => {
+        const w = cell.cellWidth;
+        doc.rect(x, y, w, rowHeight);
+        doc.line(x, y + 18, x + w, y + 18);
         doc.setFont("helvetica", "normal");
         doc.setFontSize(8.5);
         doc.setTextColor(20);
         doc.text(cell.label, x + 4, y + 12.5);
         doc.setFont("helvetica", "bold");
         doc.setFontSize(9.5);
-        const value = doc.splitTextToSize(cell.value || "", w - 8)[0] ?? "";
-        doc.text(value, x + 4, y + 31.5);
+        doc.text(cell.lines.length ? cell.lines : [""], x + 4, y + 30.5, { lineHeightFactor: 1.15 });
         x += w;
       });
-      y += 38 + 4;
+      y += rowHeight + 4;
     });
     y += 8;
   };
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(14);
-  doc.text("Parte de entrada de viajeros", left, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(9);
-  doc.setTextColor(110);
-  doc.text("Casa Rural La Plata · 9 Calle San Andrés, 06894 Aljucén (Badajoz) · 691 231 248", left, y + 14);
-  doc.setTextColor(20);
-  y += 34;
-
   const sello = await loadSello();
   if (sello) {
     try {
-      doc.addImage(sello, "PNG", right - 78, 30, 78, 96);
-      y = Math.max(y, 138);
+      doc.addImage(sello, "JPEG", right - 82, 30, 76, 100);
+      y = 142;
     } catch {
       /* sello opcional */
     }
@@ -294,45 +309,21 @@ async function buildPdf(v: FormValues) {
     y += notes.length * 13;
   }
 
-  pageBreak(90);
-  y += 24;
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(9);
-  doc.text("Firma del titular:", left, y);
-  doc.text("Fecha:", left + 300, y);
-  doc.setDrawColor(30);
-  doc.line(left + 80, y + 2, left + 260, y + 2);
-  doc.line(left + 340, y + 2, right, y + 2);
-  y += 34;
-  doc.setFontSize(8);
-  doc.setTextColor(120);
-  const legal = doc.splitTextToSize(
-    "Los datos recogidos en este parte de entrada de viajeros se tratan conforme a la normativa vigente de registro documental de viajeros y solo se comunican a las autoridades competentes.",
-    width,
-  ) as string[];
-  doc.text(legal, left, y);
-
   return doc;
 }
 
 function buildMailto(v: FormValues) {
   const subject = `Parte de entrada - ${v.tNombre} ${v.tApellido1} (${formatDate(v.entrada)} a ${formatDate(v.salida)})`;
   const body = [
-    "Hola, envío mi solicitud de reserva y el parte de entrada de viajeros.",
+    "Hola, envío mi solicitud de reserva.",
     "",
     `Titular: ${v.tNombre} ${v.tApellido1} ${v.tApellido2 ?? ""}`.trim(),
-    `Documento: ${v.tTipoDoc ?? ""} ${v.tDocumento}`.trim(),
     `Teléfono: ${v.tTelefono}`,
-    `Email: ${v.tEmail}`,
     `Entrada: ${formatDate(v.entrada)}`,
     `Salida: ${formatDate(v.salida)}`,
     `Personas: ${v.personas}`,
-    `Habitaciones: ${v.habitaciones ?? ""}`,
     "",
-    "Observaciones:",
-    v.observaciones?.trim() || "-",
-    "",
-    "(Adjunto el PDF descargado con todos los datos)",
+    "Adjunto el PDF descargado con todos los datos.",
   ].join("\n");
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
@@ -420,6 +411,9 @@ export function ReservationForm() {
     setTimeout(() => URL.revokeObjectURL(url), 60_000);
 
     setMailHref(buildMailto(result.data));
+    window.setTimeout(() => {
+      document.getElementById("enviar-solicitud")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
   };
 
   const renderField = (
@@ -550,16 +544,26 @@ export function ReservationForm() {
       </Button>
 
       {mailHref && (
-        <div className="space-y-3 rounded-xl bg-accent/10 p-4">
+        <div id="enviar-solicitud" className="space-y-3 rounded-xl bg-accent/10 p-4" tabIndex={-1}>
           <p className="flex items-start gap-2 text-sm text-foreground">
             <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
             PDF descargado. Ahora abre tu correo, adjunta el PDF y envíanoslo.
           </p>
-          <Button asChild variant="secondary" size="lg" className="w-full">
-            <a href={mailHref}>
-              <Mail className="mr-2 h-5 w-5" /> Abrir correo con la solicitud
-            </a>
+          <Button
+            type="button"
+            variant="secondary"
+            size="lg"
+            className="w-full"
+            onClick={() => window.location.assign(mailHref)}
+          >
+            <Mail className="mr-2 h-5 w-5" /> Abrir correo con la solicitud
           </Button>
+          <p className="text-center text-sm text-muted-foreground">
+            Si no se abre tu aplicación, escribe a{" "}
+            <a className="font-medium text-primary underline" href={`mailto:${CONTACT_EMAIL}`}>
+              {CONTACT_EMAIL}
+            </a>
+          </p>
         </div>
       )}
 

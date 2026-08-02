@@ -36,12 +36,9 @@ import { useState } from "react";
 
 import heroCasa from "@/assets/367534298.jpg";
 import actSenderismo from "@/assets/act-senderismo.jpg";
-import actCaceres from "@/assets/act-caceres.jpg";
-import actAeropuerto from "@/assets/act-aeropuerto.jpg";
 import dolmenDeLacara from "@/assets/Dolmen_de_Lácara_.jpg";
 import dolmenDeLacaraNoche from "@/assets/dolmenDeLacaraNoche.jpg";
 import presaRomanaParqueDeCornalvo from "@/assets/Torre_de_la_presa_romana_de_Cornalvo,_Extremadura.jpg";
-import teatroRomanoMerida from "@/assets/Teatro_romano_de_Mérida.jpg";
 import img357572260 from "@/assets/357572260.jpg";
 import img357572268 from "@/assets/357572268.jpg";
 import img357572272 from "@/assets/357572272.jpg";
@@ -87,12 +84,6 @@ const PHONE_HREF = "tel:+34691231248";
 
 const DISCOVER_ITEMS = [
   {
-    title: "Mérida, a 15 km",
-    text: "Teatro y Anfiteatro Romano, Acueducto de los Milagros y la Basílica de Santa Eulalia: el mayor conjunto monumental romano de España.",
-    image: teatroRomanoMerida,
-    alt: "Teatro Romano de Mérida al atardecer",
-  },
-  {
     title: "Dólmenes de Lácara",
     text: "Monumento megalítico de la prehistoria, uno de los sepulcros de corredor más grandes de la península ibérica.",
     image: dolmenDeLacara,
@@ -110,17 +101,20 @@ const DISCOVER_ITEMS = [
     image: actSenderismo,
     alt: "Sendero señalizado entre encinas en la dehesa extremeña",
   },
+];
+
+const NEARBY_ITEMS = [
+  {
+    title: "Mérida, a 15 km",
+    text: "Teatro y Anfiteatro Romano, Acueducto de los Milagros y la Basílica de Santa Eulalia: el mayor conjunto monumental romano de España.",
+  },
   {
     title: "Cáceres y su cuartel",
     text: "A poco más de una hora, la ciudad monumental Patrimonio de la Humanidad y el acuartelamiento de Cáceres, ideal para visitas y jornadas de familiares.",
-    image: actCaceres,
-    alt: "Plaza Mayor y murallas de Cáceres",
   },
   {
     title: "Aeropuerto de Badajoz, 59 km",
     text: "Bien comunicados por la A-66 y la N-630 para viajeros que llegan de fuera de Extremadura.",
-    image: actAeropuerto,
-    alt: "Carretera extremeña hacia el aeropuerto de Badajoz",
   },
 ];
 
@@ -737,6 +731,23 @@ function Index() {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="mt-12 border-t border-border pt-10">
+            <h3 className="text-center font-serif text-2xl font-bold text-foreground">
+              Otros puntos de interés cercanos
+            </h3>
+            <div className="mt-6 grid gap-6 md:grid-cols-3">
+              {NEARBY_ITEMS.map((item) => (
+                <article key={item.title} className="border-l-2 border-primary pl-5">
+                  <div className="flex items-start gap-2">
+                    <MapPin className="mt-1 h-4 w-4 flex-shrink-0 text-primary" />
+                    <h4 className="font-serif text-lg font-semibold text-foreground">{item.title}</h4>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                </article>
+              ))}
+            </div>
           </div>
 
           <div className="mt-12 grid items-center gap-10 lg:grid-cols-2">
