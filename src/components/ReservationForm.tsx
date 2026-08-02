@@ -158,7 +158,22 @@ async function buildPdf(v: FormValues) {
       const unit = width / cols;
       const prepared = row.map((cell) => {
         const cellWidth = unit * (cell.span ?? 1);
-        const lines = doc.splitTextToSize(cell.value || "", cellWidth - 8) as string[];
+        const rawLines = doc.splitTextToSize(cell.value || "", cellWidth - 8) as string[];
+        const lines = rawLines.flatMap((line) => {
+          if (doc.getTextWidth(line) <= cellWidth - 8) return [line];
+          const pieces: string[] = [];
+          let current = "";
+          for (const character of line) {
+            if (doc.getTextWidth(current + character) > cellWidth - 8 && current) {
+              pieces.push(current);
+              current = character;
+            } else {
+              current += character;
+            }
+          }
+          if (current) pieces.push(current);
+          return pieces;
+        });
         return { ...cell, cellWidth, lines };
       });
       const valueHeight = Math.max(20, ...prepared.map((cell) => Math.max(1, cell.lines.length) * 11 + 8));
