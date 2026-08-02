@@ -109,8 +109,8 @@ const NEARBY_ITEMS = [
     text: "Teatro y Anfiteatro Romano, Acueducto de los Milagros y la Basílica de Santa Eulalia: el mayor conjunto monumental romano de España.",
   },
   {
-    title: "Cáceres y su cuartel",
-    text: "A poco más de una hora, la ciudad monumental Patrimonio de la Humanidad y el acuartelamiento de Cáceres, ideal para visitas y jornadas de familiares.",
+    title: "Cuartel",
+    text: "blabla.",
   },
   {
     title: "Aeropuerto de Badajoz, 59 km",
@@ -162,7 +162,10 @@ export const Route = createFileRoute("/")({
           "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://casa-rural-la-plata.lovable.app/" }],
+    links: [
+      { rel: "canonical", href: "https://casa-rural-la-plata.lovable.app/" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
