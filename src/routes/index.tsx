@@ -392,6 +392,9 @@ function Index() {
           </div>
           <h1 className="font-serif text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Casa Rural La Plata
+            <span className="mt-2 block text-2xl font-bold sm:text-3xl md:text-4xl">
+              Alojamiento rural en Aljucén, junto a Mérida y Cornalvo
+            </span>
           </h1>
           <p className="mt-4 font-serif text-xl italic text-white/90 sm:text-2xl md:text-3xl">
             Tu hogar en el corazón de Extremadura
@@ -860,7 +863,7 @@ function Index() {
                     <MapPin className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Dirección</h4>
+                    <h3 className="font-semibold">Dirección</h3>
                     <p className="text-primary-foreground/90">9 Calle San Andrés, 06894 Aljucén, España</p>
                   </div>
                 </div>
@@ -869,7 +872,7 @@ function Index() {
                     <Phone className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Teléfono</h4>
+                    <h3 className="font-semibold">Teléfono</h3>
                     <a href={PHONE_HREF} className="text-lg font-semibold hover:underline">
                       {PHONE_DISPLAY}
                     </a>
@@ -880,7 +883,7 @@ function Index() {
                     <Mail className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Email</h4>
+                    <h3 className="font-semibold">Email</h3>
                     <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary-foreground/90 hover:underline">
                       {CONTACT_EMAIL}
                     </a>
@@ -891,7 +894,7 @@ function Index() {
                     <Clock className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Horarios</h4>
+                    <h3 className="font-semibold">Horarios</h3>
                     <p className="text-primary-foreground/90">Entrada: 13:00 - 23:00</p>
                     <p className="text-primary-foreground/90">Salida: 08:00 - 11:00</p>
                   </div>
