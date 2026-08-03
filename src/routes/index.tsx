@@ -72,7 +72,7 @@ import img367534576 from "@/assets/367534576.jpg";
 import img367534587 from "@/assets/367534587.jpg";
 import img367534599 from "@/assets/367534599.jpg";
 import img367534714 from "@/assets/367534714.jpg";
-import imgIglesiaAljucen from "@/assets/iglesiaAljucen.jpg";
+import imgPaisajeExtremadura from "@/assets/paisajeExtremadura.jpg";
 import { RoomGalleryDialog } from "@/components/RoomGalleryDialog";
 import { ReservationForm, CONTACT_EMAIL } from "@/components/ReservationForm";
 
@@ -768,7 +768,7 @@ function Index() {
 
           <div className="mt-12 grid items-center gap-10 lg:grid-cols-2">
             <img
-              src={imgIglesiaAljucen}
+              src={imgPaisajeExtremadura}
               alt="Iglesia de Aljucén y su entorno"
               className="rounded-2xl shadow-xl"
               width={1280}

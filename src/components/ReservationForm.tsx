@@ -328,7 +328,7 @@ async function buildPdf(v: FormValues) {
 function buildMailto(v: FormValues) {
   const subject = `Parte de entrada - ${v.tNombre} ${v.tApellido1} (${formatDate(v.entrada)} a ${formatDate(v.salida)})`;
   const body = [
-    "Hola, envío mi solicitud de reserva.",
+    "Hola, aquí tienes que adjuntar el formulario descargado.",
     "",
     `Titular: ${v.tNombre} ${v.tApellido1} ${v.tApellido2 ?? ""}`.trim(),
     `Teléfono: ${v.tTelefono}`,
@@ -336,7 +336,7 @@ function buildMailto(v: FormValues) {
     `Salida: ${formatDate(v.salida)}`,
     `Personas: ${v.personas}`,
     "",
-    "Adjunto el PDF descargado con todos los datos.",
+    "ADJUNTAR EL PDF DESCARGADO CON TODOS LOS DATOS.",
   ].join("\n");
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
@@ -573,7 +573,7 @@ export function ReservationForm() {
         <div id="enviar-solicitud" className="space-y-3 rounded-xl bg-accent/10 p-4" tabIndex={-1}>
           <p className="flex items-start gap-2 text-sm text-foreground">
             <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
-            PDF descargado. Ahora abre tu correo, adjunta el PDF y envíanoslo.
+            PDF descargado. Ahora abre tu correo, ADJUNTA el PDF y envíanoslo.
           </p>
           <Button
             type="button"
@@ -585,7 +585,7 @@ export function ReservationForm() {
             <Mail className="mr-2 h-5 w-5" /> Abrir correo con la solicitud
           </Button>
           <p className="text-center text-sm text-muted-foreground">
-            Si no se abre tu aplicación, escribe a{" "}
+            Si no se abre tu aplicación, mándalo manualmente a{" "}
             <a className="font-medium text-primary underline" href={`mailto:${CONTACT_EMAIL}`}>
               {CONTACT_EMAIL}
             </a>
