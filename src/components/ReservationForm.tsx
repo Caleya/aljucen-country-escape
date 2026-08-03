@@ -10,8 +10,23 @@ import selloAsset from "@/assets/sello.png.asset.json";
 
 export const CONTACT_EMAIL = "casarurallaplata@gmail.com";
 
-const req = (msg: string) => z.string().trim().min(1, msg).max(120);
-const opt = z.string().trim().max(120).optional().or(z.literal(""));
+const MAX = 60;
+const req = (msg: string) => z.string().trim().min(1, msg).max(MAX, `Máximo ${MAX} caracteres`);
+const opt = z.string().trim().max(MAX, `Máximo ${MAX} caracteres`).optional().or(z.literal(""));
+const num = (msg: string) =>
+  z
+    .string()
+    .trim()
+    .min(1, msg)
+    .max(3)
+    .refine((value) => /^\d+$/.test(value) && Number(value) > 0, "Introduce un número mayor que 0");
+const numOpt = z
+  .string()
+  .trim()
+  .max(3)
+  .refine((value) => value === "" || (/^\d+$/.test(value) && Number(value) > 0), "Introduce un número mayor que 0")
+  .optional()
+  .or(z.literal(""));
 
 const schema = z.object({
   // Datos de la reserva
@@ -19,8 +34,8 @@ const schema = z.object({
   fechaContrato: opt,
   entrada: z.string().min(1, "Indica la fecha de entrada"),
   salida: z.string().min(1, "Indica la fecha de salida"),
-  personas: req("Indica el nº de personas"),
-  habitaciones: opt,
+  personas: num("Indica el nº de personas"),
+  habitaciones: numOpt,
   // Pago
   tipoPago: opt,
   medioPago: opt,
@@ -38,7 +53,7 @@ const schema = z.object({
   tSoporteDoc: opt,
   tTelefono: req("Indica un teléfono"),
   tTelefono2: opt,
-  tEmail: z.string().trim().email("Email no válido").max(255),
+  tEmail: z.string().trim().email("Email no válido").max(80, "Máximo 80 caracteres"),
   tDireccion: opt,
   tDireccion2: opt,
   tPais: opt,
@@ -57,7 +72,7 @@ const schema = z.object({
   vSoporteDoc: opt,
   vTelefono: opt,
   vTelefono2: opt,
-  vEmail: opt,
+  vEmail: z.string().trim().max(80, "Máximo 80 caracteres").optional().or(z.literal("")),
   vParentesco: opt,
   vDireccion: opt,
   vDireccion2: opt,
@@ -65,7 +80,7 @@ const schema = z.object({
   vProvincia: opt,
   vMunicipio: opt,
   vCodigoPostal: opt,
-  observaciones: z.string().trim().max(1000).optional().or(z.literal("")),
+  observaciones: z.string().trim().max(300, "Máximo 300 caracteres").optional().or(z.literal("")),
 });
 
 type FormValues = z.infer<typeof schema>;
