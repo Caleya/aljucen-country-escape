@@ -4,7 +4,6 @@ import { jsPDF } from "jspdf";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Download, Mail, CheckCircle2 } from "lucide-react";
 import selloAsset from "@/assets/sello.png.asset.json";
 
@@ -80,7 +79,6 @@ const schema = z.object({
   vProvincia: opt,
   vMunicipio: opt,
   vCodigoPostal: opt,
-  observaciones: z.string().trim().max(300, "Máximo 300 caracteres").optional().or(z.literal("")),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -320,17 +318,6 @@ async function buildPdf(v: FormValues) {
       { label: "Código postal", value: v.vCodigoPostal ?? "" },
     ],
   ]);
-
-  if (v.observaciones?.trim()) {
-    heading("Observaciones");
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(8.5);
-    const allNotes = doc.splitTextToSize(v.observaciones.trim(), width) as string[];
-    const maxLines = Math.max(0, Math.floor((BOTTOM - y) / 11));
-    const notes = allNotes.slice(0, maxLines);
-    if (notes.length) doc.text(notes, left, y);
-    y += notes.length * 11;
-  }
 
   // Garantiza una sola página
   while (doc.getNumberOfPages() > 1) doc.deletePage(doc.getNumberOfPages());
