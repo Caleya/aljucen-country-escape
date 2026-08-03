@@ -149,22 +149,15 @@ async function buildPdf(v: FormValues) {
   const left = 42;
   const right = 553;
   const width = right - left;
-  let y = 44;
-
-  const pageBreak = (needed: number) => {
-    if (y + needed > 800) {
-      doc.addPage();
-      y = 44;
-    }
-  };
+  const BOTTOM = 812;
+  let y = 40;
 
   const heading = (text: string) => {
-    pageBreak(40);
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
+    doc.setFontSize(10);
     doc.setTextColor(20);
     doc.text(text, left, y);
-    y += 18;
+    y += 14;
   };
 
   const table = (rows: Cell[][]) => {
@@ -191,35 +184,35 @@ async function buildPdf(v: FormValues) {
         });
         return { ...cell, cellWidth, lines };
       });
-      const valueHeight = Math.max(20, ...prepared.map((cell) => Math.max(1, cell.lines.length) * 11 + 8));
-      const rowHeight = 18 + valueHeight;
-      pageBreak(rowHeight + 4);
+      const valueHeight = Math.max(14, ...prepared.map((cell) => Math.min(2, Math.max(1, cell.lines.length)) * 9 + 5));
+      const rowHeight = 12 + valueHeight;
+      if (y + rowHeight > BOTTOM) return;
       let x = left;
       doc.setDrawColor(30);
-      doc.setLineWidth(0.7);
+      doc.setLineWidth(0.5);
       prepared.forEach((cell) => {
         const w = cell.cellWidth;
         doc.rect(x, y, w, rowHeight);
-        doc.line(x, y + 18, x + w, y + 18);
+        doc.line(x, y + 12, x + w, y + 12);
         doc.setFont("helvetica", "normal");
-        doc.setFontSize(8.5);
+        doc.setFontSize(7);
         doc.setTextColor(20);
-        doc.text(cell.label, x + 4, y + 12.5);
+        doc.text(cell.label, x + 4, y + 8.5);
         doc.setFont("helvetica", "bold");
-        doc.setFontSize(9.5);
-        doc.text(cell.lines.length ? cell.lines : [""], x + 4, y + 30.5, { lineHeightFactor: 1.15 });
+        doc.setFontSize(8.5);
+        doc.text(cell.lines.length ? cell.lines.slice(0, 2) : [""], x + 4, y + 21, { lineHeightFactor: 1.1 });
         x += w;
       });
-      y += rowHeight + 4;
+      y += rowHeight + 3;
     });
-    y += 8;
+    y += 5;
   };
 
   const sello = await loadSello();
   if (sello) {
     try {
-      doc.addImage(sello, "JPEG", right - 82, 30, 76, 100);
-      y = 142;
+      doc.addImage(sello, "JPEG", right - 68, 26, 62, 82);
+      y = 116;
     } catch {
       /* sello opcional */
     }
@@ -330,14 +323,17 @@ async function buildPdf(v: FormValues) {
 
   if (v.observaciones?.trim()) {
     heading("Observaciones");
-    y += 6;
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(9.5);
-    const notes = doc.splitTextToSize(v.observaciones.trim(), width) as string[];
-    pageBreak(notes.length * 13 + 20);
-    doc.text(notes, left, y);
-    y += notes.length * 13;
+    doc.setFontSize(8.5);
+    const allNotes = doc.splitTextToSize(v.observaciones.trim(), width) as string[];
+    const maxLines = Math.max(0, Math.floor((BOTTOM - y) / 11));
+    const notes = allNotes.slice(0, maxLines);
+    if (notes.length) doc.text(notes, left, y);
+    y += notes.length * 11;
   }
+
+  // Garantiza una sola página
+  while (doc.getNumberOfPages() > 1) doc.deletePage(doc.getNumberOfPages());
 
   return doc;
 }
