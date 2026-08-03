@@ -109,7 +109,7 @@ const NEARBY_ITEMS = [
     text: "Teatro y Anfiteatro Romano, Acueducto de los Milagros y la Basílica de Santa Eulalia: el mayor conjunto monumental romano de España.",
   },
   {
-    title: "CEFOT de Cáceres (Acuartelamiento Santa Ana)",
+    title: "CEFOT de Cáceres (Acuartelamiento Santa Ana), a menos de 30 min en coche",
     text: "Centro de Formación de Tropa nº 1 del Ejército de Tierra, en Cáceres. Alojamiento cómodo para familias que visitan a los alumnos en juras de bandera, entregas de despachos y fines de semana de permiso.",
   },
   {
