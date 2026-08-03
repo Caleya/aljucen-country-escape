@@ -445,7 +445,13 @@ export function ReservationForm() {
   const renderField = (
     name: FieldName,
     label: string,
-    options?: { type?: string; className?: string; placeholder?: string; disabled?: boolean },
+    options?: {
+      type?: string;
+      className?: string;
+      placeholder?: string;
+      disabled?: boolean;
+      maxLength?: number;
+    },
   ) => (
     <div key={name} className={options?.className}>
       <Label htmlFor={name}>{label}</Label>
@@ -453,10 +459,17 @@ export function ReservationForm() {
         id={name}
         type={options?.type ?? "text"}
         value={values[name] ?? ""}
-        onChange={(e) => update(name, e.target.value)}
+        onChange={(e) => {
+          const limit = options?.maxLength ?? 60;
+          let next = e.target.value;
+          if (options?.type === "number") next = next.replace(/[^\d]/g, "");
+          update(name, next.slice(0, limit));
+        }}
         placeholder={options?.placeholder}
         disabled={options?.disabled}
-        maxLength={120}
+        maxLength={options?.maxLength ?? 60}
+        min={options?.type === "number" ? 1 : undefined}
+        step={options?.type === "number" ? 1 : undefined}
         className="mt-1"
       />
       {errors[name] && <p className="mt-1 text-sm text-destructive">{errors[name]}</p>}
@@ -495,8 +508,8 @@ export function ReservationForm() {
         {renderField("fechaContrato", "Fecha del contrato", { type: "date" })}
         {renderField("entrada", "Fecha de entrada", { type: "date" })}
         {renderField("salida", "Fecha de salida", { type: "date" })}
-        {renderField("personas", "Número de personas", { type: "number" })}
-        {renderField("habitaciones", "Número de habitaciones", { type: "number" })}
+        {renderField("personas", "Número de personas", { type: "number", maxLength: 3 })}
+        {renderField("habitaciones", "Número de habitaciones", { type: "number", maxLength: 3 })}
       </Section>
 
       <Section title="Información del pago">
@@ -518,7 +531,7 @@ export function ReservationForm() {
         {renderField("tSoporteDoc", "Soporte del documento")}
         {renderField("tTelefono", "Teléfono", { type: "tel" })}
         {renderField("tTelefono2", "Teléfono adicional", { type: "tel" })}
-        {renderField("tEmail", "Correo electrónico", { type: "email" })}
+        {renderField("tEmail", "Correo electrónico", { type: "email", maxLength: 80 })}
       </Section>
 
       <Section title="Dirección del titular">
@@ -552,7 +565,7 @@ export function ReservationForm() {
         {renderField("vSoporteDoc", "Soporte del documento", { disabled: sameAsTitular })}
         {renderField("vTelefono", "Teléfono", { type: "tel", disabled: sameAsTitular })}
         {renderField("vTelefono2", "Teléfono adicional", { type: "tel", disabled: sameAsTitular })}
-        {renderField("vEmail", "Correo electrónico", { type: "email", disabled: sameAsTitular })}
+        {renderField("vEmail", "Correo electrónico", { type: "email", disabled: sameAsTitular, maxLength: 80 })}
         {renderField("vParentesco", "Parentesco", { disabled: sameAsTitular })}
       </Section>
 
