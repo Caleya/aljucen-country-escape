@@ -10,8 +10,23 @@ import selloAsset from "@/assets/sello.png.asset.json";
 
 export const CONTACT_EMAIL = "casarurallaplata@gmail.com";
 
-const req = (msg: string) => z.string().trim().min(1, msg).max(120);
-const opt = z.string().trim().max(120).optional().or(z.literal(""));
+const MAX = 60;
+const req = (msg: string) => z.string().trim().min(1, msg).max(MAX, `Máximo ${MAX} caracteres`);
+const opt = z.string().trim().max(MAX, `Máximo ${MAX} caracteres`).optional().or(z.literal(""));
+const num = (msg: string) =>
+  z
+    .string()
+    .trim()
+    .min(1, msg)
+    .max(3)
+    .refine((value) => /^\d+$/.test(value) && Number(value) > 0, "Introduce un número mayor que 0");
+const numOpt = z
+  .string()
+  .trim()
+  .max(3)
+  .refine((value) => value === "" || (/^\d+$/.test(value) && Number(value) > 0), "Introduce un número mayor que 0")
+  .optional()
+  .or(z.literal(""));
 
 const schema = z.object({
   // Datos de la reserva
@@ -19,8 +34,8 @@ const schema = z.object({
   fechaContrato: opt,
   entrada: z.string().min(1, "Indica la fecha de entrada"),
   salida: z.string().min(1, "Indica la fecha de salida"),
-  personas: req("Indica el nº de personas"),
-  habitaciones: opt,
+  personas: num("Indica el nº de personas"),
+  habitaciones: numOpt,
   // Pago
   tipoPago: opt,
   medioPago: opt,
@@ -38,7 +53,7 @@ const schema = z.object({
   tSoporteDoc: opt,
   tTelefono: req("Indica un teléfono"),
   tTelefono2: opt,
-  tEmail: z.string().trim().email("Email no válido").max(255),
+  tEmail: z.string().trim().email("Email no válido").max(80, "Máximo 80 caracteres"),
   tDireccion: opt,
   tDireccion2: opt,
   tPais: opt,
@@ -57,7 +72,7 @@ const schema = z.object({
   vSoporteDoc: opt,
   vTelefono: opt,
   vTelefono2: opt,
-  vEmail: opt,
+  vEmail: z.string().trim().max(80, "Máximo 80 caracteres").optional().or(z.literal("")),
   vParentesco: opt,
   vDireccion: opt,
   vDireccion2: opt,
@@ -65,7 +80,7 @@ const schema = z.object({
   vProvincia: opt,
   vMunicipio: opt,
   vCodigoPostal: opt,
-  observaciones: z.string().trim().max(1000).optional().or(z.literal("")),
+  observaciones: z.string().trim().max(300, "Máximo 300 caracteres").optional().or(z.literal("")),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -134,22 +149,15 @@ async function buildPdf(v: FormValues) {
   const left = 42;
   const right = 553;
   const width = right - left;
-  let y = 44;
-
-  const pageBreak = (needed: number) => {
-    if (y + needed > 800) {
-      doc.addPage();
-      y = 44;
-    }
-  };
+  const BOTTOM = 812;
+  let y = 40;
 
   const heading = (text: string) => {
-    pageBreak(40);
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
+    doc.setFontSize(10);
     doc.setTextColor(20);
     doc.text(text, left, y);
-    y += 18;
+    y += 14;
   };
 
   const table = (rows: Cell[][]) => {
@@ -176,35 +184,35 @@ async function buildPdf(v: FormValues) {
         });
         return { ...cell, cellWidth, lines };
       });
-      const valueHeight = Math.max(20, ...prepared.map((cell) => Math.max(1, cell.lines.length) * 11 + 8));
-      const rowHeight = 18 + valueHeight;
-      pageBreak(rowHeight + 4);
+      const valueHeight = Math.max(14, ...prepared.map((cell) => Math.min(2, Math.max(1, cell.lines.length)) * 9 + 5));
+      const rowHeight = 12 + valueHeight;
+      if (y + rowHeight > BOTTOM) return;
       let x = left;
       doc.setDrawColor(30);
-      doc.setLineWidth(0.7);
+      doc.setLineWidth(0.5);
       prepared.forEach((cell) => {
         const w = cell.cellWidth;
         doc.rect(x, y, w, rowHeight);
-        doc.line(x, y + 18, x + w, y + 18);
+        doc.line(x, y + 12, x + w, y + 12);
         doc.setFont("helvetica", "normal");
-        doc.setFontSize(8.5);
+        doc.setFontSize(7);
         doc.setTextColor(20);
-        doc.text(cell.label, x + 4, y + 12.5);
+        doc.text(cell.label, x + 4, y + 8.5);
         doc.setFont("helvetica", "bold");
-        doc.setFontSize(9.5);
-        doc.text(cell.lines.length ? cell.lines : [""], x + 4, y + 30.5, { lineHeightFactor: 1.15 });
+        doc.setFontSize(8.5);
+        doc.text(cell.lines.length ? cell.lines.slice(0, 2) : [""], x + 4, y + 21, { lineHeightFactor: 1.1 });
         x += w;
       });
-      y += rowHeight + 4;
+      y += rowHeight + 3;
     });
-    y += 8;
+    y += 5;
   };
 
   const sello = await loadSello();
   if (sello) {
     try {
-      doc.addImage(sello, "JPEG", right - 82, 30, 76, 100);
-      y = 142;
+      doc.addImage(sello, "JPEG", right - 68, 26, 62, 82);
+      y = 116;
     } catch {
       /* sello opcional */
     }
@@ -315,14 +323,17 @@ async function buildPdf(v: FormValues) {
 
   if (v.observaciones?.trim()) {
     heading("Observaciones");
-    y += 6;
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(9.5);
-    const notes = doc.splitTextToSize(v.observaciones.trim(), width) as string[];
-    pageBreak(notes.length * 13 + 20);
-    doc.text(notes, left, y);
-    y += notes.length * 13;
+    doc.setFontSize(8.5);
+    const allNotes = doc.splitTextToSize(v.observaciones.trim(), width) as string[];
+    const maxLines = Math.max(0, Math.floor((BOTTOM - y) / 11));
+    const notes = allNotes.slice(0, maxLines);
+    if (notes.length) doc.text(notes, left, y);
+    y += notes.length * 11;
   }
+
+  // Garantiza una sola página
+  while (doc.getNumberOfPages() > 1) doc.deletePage(doc.getNumberOfPages());
 
   return doc;
 }
@@ -434,7 +445,13 @@ export function ReservationForm() {
   const renderField = (
     name: FieldName,
     label: string,
-    options?: { type?: string; className?: string; placeholder?: string; disabled?: boolean },
+    options?: {
+      type?: string;
+      className?: string;
+      placeholder?: string;
+      disabled?: boolean;
+      maxLength?: number;
+    },
   ) => (
     <div key={name} className={options?.className}>
       <Label htmlFor={name}>{label}</Label>
@@ -442,10 +459,17 @@ export function ReservationForm() {
         id={name}
         type={options?.type ?? "text"}
         value={values[name] ?? ""}
-        onChange={(e) => update(name, e.target.value)}
+        onChange={(e) => {
+          const limit = options?.maxLength ?? 60;
+          let next = e.target.value;
+          if (options?.type === "number") next = next.replace(/[^\d]/g, "");
+          update(name, next.slice(0, limit));
+        }}
         placeholder={options?.placeholder}
         disabled={options?.disabled}
-        maxLength={120}
+        maxLength={options?.maxLength ?? 60}
+        min={options?.type === "number" ? 1 : undefined}
+        step={options?.type === "number" ? 1 : undefined}
         className="mt-1"
       />
       {errors[name] && <p className="mt-1 text-sm text-destructive">{errors[name]}</p>}
@@ -484,8 +508,8 @@ export function ReservationForm() {
         {renderField("fechaContrato", "Fecha del contrato", { type: "date" })}
         {renderField("entrada", "Fecha de entrada", { type: "date" })}
         {renderField("salida", "Fecha de salida", { type: "date" })}
-        {renderField("personas", "Número de personas", { type: "number" })}
-        {renderField("habitaciones", "Número de habitaciones", { type: "number" })}
+        {renderField("personas", "Número de personas", { type: "number", maxLength: 3 })}
+        {renderField("habitaciones", "Número de habitaciones", { type: "number", maxLength: 3 })}
       </Section>
 
       <Section title="Información del pago">
@@ -507,7 +531,7 @@ export function ReservationForm() {
         {renderField("tSoporteDoc", "Soporte del documento")}
         {renderField("tTelefono", "Teléfono", { type: "tel" })}
         {renderField("tTelefono2", "Teléfono adicional", { type: "tel" })}
-        {renderField("tEmail", "Correo electrónico", { type: "email" })}
+        {renderField("tEmail", "Correo electrónico", { type: "email", maxLength: 80 })}
       </Section>
 
       <Section title="Dirección del titular">
@@ -541,7 +565,7 @@ export function ReservationForm() {
         {renderField("vSoporteDoc", "Soporte del documento", { disabled: sameAsTitular })}
         {renderField("vTelefono", "Teléfono", { type: "tel", disabled: sameAsTitular })}
         {renderField("vTelefono2", "Teléfono adicional", { type: "tel", disabled: sameAsTitular })}
-        {renderField("vEmail", "Correo electrónico", { type: "email", disabled: sameAsTitular })}
+        {renderField("vEmail", "Correo electrónico", { type: "email", disabled: sameAsTitular, maxLength: 80 })}
         {renderField("vParentesco", "Parentesco", { disabled: sameAsTitular })}
       </Section>
 
