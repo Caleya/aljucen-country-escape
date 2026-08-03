@@ -109,8 +109,8 @@ const NEARBY_ITEMS = [
     text: "Teatro y Anfiteatro Romano, Acueducto de los Milagros y la Basílica de Santa Eulalia: el mayor conjunto monumental romano de España.",
   },
   {
-    title: "Cuartel",
-    text: "blabla.",
+    title: "CEFOT de Cáceres (Acuartelamiento Santa Ana)",
+    text: "Centro de Formación de Tropa nº 1 del Ejército de Tierra, en Cáceres. Alojamiento cómodo para familias que visitan a los alumnos en juras de bandera, entregas de despachos y fines de semana de permiso.",
   },
   {
     title: "Aeropuerto de Badajoz, 59 km",
@@ -124,7 +124,7 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo" },
+      { title: "Casa Rural La Plata | Casa Rural en Aljucén (Badajoz)" },
       {
         name: "description",
         content:
@@ -132,7 +132,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo",
+        content: "Casa Rural La Plata | Casa Rural en Aljucén (Badajoz)",
       },
       {
         property: "og:description",
@@ -154,7 +154,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Casa Rural La Plata | Aljucén, Mérida y Cornalvo",
+        content: "Casa Rural La Plata | Casa Rural en Aljucén (Badajoz)",
       },
       {
         name: "twitter:description",
@@ -406,7 +406,7 @@ function Index() {
           <h1 className="font-serif text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Casa Rural La Plata
             <span className="mt-2 block text-2xl font-bold sm:text-3xl md:text-4xl">
-              Alojamiento rural en Aljucén, junto a Mérida y Cornalvo
+              Alojamiento y casa rural en Aljucén, a 15 km de Mérida
             </span>
           </h1>
           <p className="mt-4 font-serif text-xl italic text-white/90 sm:text-2xl md:text-3xl">
@@ -462,7 +462,7 @@ function Index() {
                 Bienvenidos
               </span>
               <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
-                Un rincón de paz en Aljucén
+                Casa rural y alojamiento con encanto en Aljucén
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                 Casa Rural La Plata te ofrece una experiencia auténtica en el corazón de Extremadura. Nuestra
@@ -503,7 +503,7 @@ function Index() {
           <div className="mb-12 text-center">
             <span className="text-sm font-semibold uppercase tracking-wider text-primary">Descansa</span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
-              Nuestras habitaciones
+              Habitaciones de nuestra casa rural en Aljucén
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
               Tres opciones diseñadas para tu descanso, todas con baño privado y las comodidades que necesitas.
