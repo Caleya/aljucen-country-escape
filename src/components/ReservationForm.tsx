@@ -11,7 +11,6 @@ export const CONTACT_EMAIL = "casarurallaplata@gmail.com";
 
 const MAX = 60;
 const req = (msg: string) => z.string().trim().min(1, msg).max(MAX, `Máximo ${MAX} caracteres`);
-const opt = z.string().trim().max(MAX, `Máximo ${MAX} caracteres`).optional().or(z.literal(""));
 const num = (msg: string) =>
   z
     .string()
@@ -19,66 +18,59 @@ const num = (msg: string) =>
     .min(1, msg)
     .max(3)
     .refine((value) => /^\d+$/.test(value) && Number(value) > 0, "Introduce un número mayor que 0");
-const numOpt = z
-  .string()
-  .trim()
-  .max(3)
-  .refine((value) => value === "" || (/^\d+$/.test(value) && Number(value) > 0), "Introduce un número mayor que 0")
-  .optional()
-  .or(z.literal(""));
 
 const schema = z.object({
   // Datos de la reserva
-  referencia: opt,
-  fechaContrato: opt,
+  referencia: req("Indica la referencia"),
+  fechaContrato: z.string().min(1, "Indica la fecha del contrato"),
   entrada: z.string().min(1, "Indica la fecha de entrada"),
   salida: z.string().min(1, "Indica la fecha de salida"),
   personas: num("Indica el nº de personas"),
-  habitaciones: numOpt,
+  habitaciones: num("Indica el nº de habitaciones"),
   // Pago
-  tipoPago: opt,
-  medioPago: opt,
-  titularPago: opt,
-  fechaPago: opt,
+  tipoPago: req("Indica el tipo de pago"),
+  medioPago: req("Indica el medio de pago"),
+  titularPago: req("Indica el titular del pago"),
+  fechaPago: z.string().min(1, "Indica la fecha de pago"),
   // Titular
   tNombre: req("Indica el nombre"),
   tApellido1: req("Indica el primer apellido"),
-  tApellido2: opt,
-  tNacimiento: opt,
-  tNacionalidad: opt,
-  tSexo: opt,
-  tTipoDoc: opt,
+  tApellido2: req("Indica el segundo apellido"),
+  tNacimiento: z.string().min(1, "Indica la fecha de nacimiento"),
+  tNacionalidad: req("Indica la nacionalidad"),
+  tSexo: req("Indica el sexo"),
+  tTipoDoc: req("Indica el tipo de documento"),
   tDocumento: req("Indica el documento"),
-  tSoporteDoc: opt,
+  tSoporteDoc: req("Indica el soporte del documento"),
   tTelefono: req("Indica un teléfono"),
-  tTelefono2: opt,
+  tTelefono2: req("Indica un teléfono adicional"),
   tEmail: z.string().trim().email("Email no válido").max(80, "Máximo 80 caracteres"),
-  tDireccion: opt,
-  tDireccion2: opt,
-  tPais: opt,
-  tProvincia: opt,
-  tMunicipio: opt,
-  tCodigoPostal: opt,
+  tDireccion: req("Indica la dirección"),
+  tDireccion2: req("Indica la dirección adicional"),
+  tPais: req("Indica el país"),
+  tProvincia: req("Indica la provincia"),
+  tMunicipio: req("Indica el municipio"),
+  tCodigoPostal: req("Indica el código postal"),
   // Viajero
-  vNombre: opt,
-  vApellido1: opt,
-  vApellido2: opt,
-  vNacimiento: opt,
-  vNacionalidad: opt,
-  vSexo: opt,
-  vTipoDoc: opt,
-  vDocumento: opt,
-  vSoporteDoc: opt,
-  vTelefono: opt,
-  vTelefono2: opt,
-  vEmail: z.string().trim().max(80, "Máximo 80 caracteres").optional().or(z.literal("")),
-  vParentesco: opt,
-  vDireccion: opt,
-  vDireccion2: opt,
-  vPais: opt,
-  vProvincia: opt,
-  vMunicipio: opt,
-  vCodigoPostal: opt,
+  vNombre: req("Indica el nombre"),
+  vApellido1: req("Indica el primer apellido"),
+  vApellido2: req("Indica el segundo apellido"),
+  vNacimiento: z.string().min(1, "Indica la fecha de nacimiento"),
+  vNacionalidad: req("Indica la nacionalidad"),
+  vSexo: req("Indica el sexo"),
+  vTipoDoc: req("Indica el tipo de documento"),
+  vDocumento: req("Indica el documento"),
+  vSoporteDoc: req("Indica el soporte del documento"),
+  vTelefono: req("Indica un teléfono"),
+  vTelefono2: req("Indica un teléfono adicional"),
+  vEmail: z.string().trim().email("Email no válido").max(80, "Máximo 80 caracteres"),
+  vParentesco: req("Indica el parentesco"),
+  vDireccion: req("Indica la dirección"),
+  vDireccion2: req("Indica la dirección adicional"),
+  vPais: req("Indica el país"),
+  vProvincia: req("Indica la provincia"),
+  vMunicipio: req("Indica el municipio"),
+  vCodigoPostal: req("Indica el código postal"),
 });
 
 type FormValues = z.infer<typeof schema>;
