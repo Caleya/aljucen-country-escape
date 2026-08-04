@@ -128,8 +128,18 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida y junto al Parque Natural de Cornalvo. Alojamiento rural en Extremadura con habitaciones con baño privado, cocina, jardín, WiFi y parking gratis. Reserva directa.",
       },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      {
+        name: "keywords",
+        content:
+          "casa rural Aljucén, Casa Rural La Plata, casa rural cerca de Mérida, casa rural Badajoz, alojamiento rural Extremadura, turismo rural Extremadura, Parque Natural de Cornalvo, Vía de la Plata, escapadas rurales, senderismo Extremadura",
+      },
+      { name: "geo.region", content: "ES-EX" },
+      { name: "geo.placename", content: "Aljucén, Badajoz, Extremadura" },
+      { name: "geo.position", content: "39.043433;-6.330419" },
+      { name: "ICBM", content: "39.043433, -6.330419" },
       {
         property: "og:title",
         content: "Casa Rural La Plata | Casa Rural en Aljucén (Badajoz)",
@@ -137,9 +147,10 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida y junto al Parque Natural de Cornalvo. Alojamiento rural en Extremadura con jardín, cocina, WiFi y parking gratis.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "es_ES" },
       { property: "og:url", content: "https://casa-rural-la-plata.lovable.app/" },
       {
         property: "og:image",
@@ -159,7 +170,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida y junto al Parque Natural de Cornalvo. Alojamiento rural en Extremadura con jardín, cocina, WiFi y parking gratis.",
       },
     ],
     links: [
