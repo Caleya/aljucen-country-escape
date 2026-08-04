@@ -144,10 +144,10 @@ async function buildPdf(v: FormValues) {
 
   const heading = (text: string) => {
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
+    doc.setFontSize(9);
     doc.setTextColor(20);
     doc.text(text, left, y);
-    y += 14;
+    y += 12;
   };
 
   const table = (rows: Cell[][]) => {
@@ -174,8 +174,8 @@ async function buildPdf(v: FormValues) {
         });
         return { ...cell, cellWidth, lines };
       });
-      const valueHeight = Math.max(14, ...prepared.map((cell) => Math.min(2, Math.max(1, cell.lines.length)) * 9 + 5));
-      const rowHeight = 12 + valueHeight;
+      const valueHeight = Math.max(11, ...prepared.map((cell) => Math.min(2, Math.max(1, cell.lines.length)) * 7.5 + 3));
+      const rowHeight = 10 + valueHeight;
       if (y + rowHeight > BOTTOM) return;
       let x = left;
       doc.setDrawColor(30);
@@ -183,26 +183,26 @@ async function buildPdf(v: FormValues) {
       prepared.forEach((cell) => {
         const w = cell.cellWidth;
         doc.rect(x, y, w, rowHeight);
-        doc.line(x, y + 12, x + w, y + 12);
+        doc.line(x, y + 10, x + w, y + 10);
         doc.setFont("helvetica", "normal");
-        doc.setFontSize(7);
+        doc.setFontSize(6.5);
         doc.setTextColor(20);
-        doc.text(cell.label, x + 4, y + 8.5);
+        doc.text(cell.label, x + 3, y + 7);
         doc.setFont("helvetica", "bold");
-        doc.setFontSize(8.5);
-        doc.text(cell.lines.length ? cell.lines.slice(0, 2) : [""], x + 4, y + 21, { lineHeightFactor: 1.1 });
+        doc.setFontSize(8);
+        doc.text(cell.lines.length ? cell.lines.slice(0, 2) : [""], x + 3, y + 17.5, { lineHeightFactor: 1.05 });
         x += w;
       });
-      y += rowHeight + 3;
+      y += rowHeight + 2;
     });
-    y += 5;
+    y += 4;
   };
 
   const sello = await loadSello();
   if (sello) {
     try {
-      doc.addImage(sello, "JPEG", right - 68, 26, 62, 82);
-      y = 116;
+      doc.addImage(sello, "JPEG", right - 62, 24, 56, 74);
+      y = 106;
     } catch {
       /* sello opcional */
     }
