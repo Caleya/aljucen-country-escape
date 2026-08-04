@@ -151,7 +151,7 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_ES" },
-      { property: "og:url", content: "https://casa-rural-la-plata.lovable.app/" },
+      { property: "og:url", content: "https://casa-rural-la-plata-aljucen.vercel.app/" },
       {
         property: "og:image",
         content:
@@ -174,8 +174,8 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [
-      { rel: "canonical", href: "https://casa-rural-la-plata.lovable.app/" },
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "canonical", href: "https://casa-rural-la-plata-aljucen.vercel.app/" },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
     ],
     scripts: [
       {
