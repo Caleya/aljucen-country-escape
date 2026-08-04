@@ -128,8 +128,18 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida y junto al Parque Natural de Cornalvo. Alojamiento rural en Extremadura con habitaciones con baño privado, cocina, jardín, WiFi y parking gratis. Reserva directa.",
       },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      {
+        name: "keywords",
+        content:
+          "casa rural Aljucén, Casa Rural La Plata, casa rural cerca de Mérida, casa rural Badajoz, alojamiento rural Extremadura, turismo rural Extremadura, Parque Natural de Cornalvo, Vía de la Plata, escapadas rurales, senderismo Extremadura",
+      },
+      { name: "geo.region", content: "ES-EX" },
+      { name: "geo.placename", content: "Aljucén, Badajoz, Extremadura" },
+      { name: "geo.position", content: "39.043433;-6.330419" },
+      { name: "ICBM", content: "39.043433, -6.330419" },
       {
         property: "og:title",
         content: "Casa Rural La Plata | Casa Rural en Aljucén (Badajoz)",
@@ -137,9 +147,10 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida y junto al Parque Natural de Cornalvo. Alojamiento rural en Extremadura con jardín, cocina, WiFi y parking gratis.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "es_ES" },
       { property: "og:url", content: "https://casa-rural-la-plata.lovable.app/" },
       {
         property: "og:image",
@@ -159,7 +170,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida, en el Camino de Santiago Vía de la Plata y junto al Parque Natural de Cornalvo. WiFi y parking gratis.",
+          "Casa rural en Aljucén (Badajoz), a 15 km de Mérida y junto al Parque Natural de Cornalvo. Alojamiento rural en Extremadura con jardín, cocina, WiFi y parking gratis.",
       },
     ],
     links: [
@@ -171,34 +182,120 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LodgingBusiness",
-          name: "Casa Rural La Plata",
-          description:
-            "Alojamiento con encanto en Aljucén, Extremadura. WiFi y parking gratis, a 15 km de Mérida.",
-          url: "https://id-preview--071a932c-e943-43a1-815e-71f9365f3ca7.lovable.app/",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "9 Calle San Andrés",
-            addressLocality: "Aljucén",
-            addressRegion: "Badajoz",
-            postalCode: "06894",
-            addressCountry: "ES",
-          },
-          telephone: "+34691231248",
-          email: "casarurallaplata@gmail.com",
-          priceRange: "€€",
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "9.3",
-            reviewCount: "492",
-            bestRating: "10",
-          },
-          amenityFeature: [
-            { "@type": "LocationFeatureSpecification", name: "WiFi gratis", value: true },
-            { "@type": "LocationFeatureSpecification", name: "Parking gratis", value: true },
-            { "@type": "LocationFeatureSpecification", name: "Aire acondicionado", value: true },
-            { "@type": "LocationFeatureSpecification", name: "Jardín", value: true },
-            { "@type": "LocationFeatureSpecification", name: "Terraza", value: true },
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://casa-rural-la-plata.lovable.app/#organization",
+              name: "Casa Rural La Plata",
+              url: "https://casa-rural-la-plata.lovable.app/",
+              email: "casarurallaplata@gmail.com",
+              telephone: "+34691231248",
+              areaServed: ["Aljucén", "Mérida", "Provincia de Badajoz", "Extremadura"],
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://casa-rural-la-plata.lovable.app/#website",
+              url: "https://casa-rural-la-plata.lovable.app/",
+              name: "Casa Rural La Plata | Casa rural en Aljucén (Badajoz)",
+              inLanguage: "es-ES",
+              publisher: { "@id": "https://casa-rural-la-plata.lovable.app/#organization" },
+            },
+            {
+              "@type": ["LodgingBusiness", "LocalBusiness"],
+              "@id": "https://casa-rural-la-plata.lovable.app/#lodging",
+              name: "Casa Rural La Plata",
+              description:
+                "Casa rural en Aljucén (Badajoz), alojamiento rural en Extremadura a 15 km de Mérida, junto al Parque Natural de Cornalvo y el Camino de Santiago Vía de la Plata. Habitaciones con baño privado, cocina y jardín compartidos, WiFi y parking gratis.",
+              url: "https://casa-rural-la-plata.lovable.app/",
+              image:
+                "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6c94080a-df86-4b8f-90f8-6914ffd51396/id-preview-e52e90e4--071a932c-e943-43a1-815e-71f9365f3ca7.lovable.app-1785340436284.png",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "9 Calle San Andrés",
+                addressLocality: "Aljucén",
+                addressRegion: "Badajoz",
+                postalCode: "06894",
+                addressCountry: "ES",
+              },
+              geo: { "@type": "GeoCoordinates", latitude: 39.043433, longitude: -6.330419 },
+              hasMap:
+                "https://www.google.com/maps/place/Casa+rural+la+plata/@39.043433,-6.3329939,17z",
+              telephone: "+34691231248",
+              email: "casarurallaplata@gmail.com",
+              priceRange: "€€",
+              currenciesAccepted: "EUR",
+              checkinTime: "13:00",
+              checkoutTime: "11:00",
+              numberOfRooms: 3,
+              petsAllowed: true,
+              parentOrganization: { "@id": "https://casa-rural-la-plata.lovable.app/#organization" },
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "9.3",
+                reviewCount: "492",
+                bestRating: "10",
+              },
+              amenityFeature: [
+                { "@type": "LocationFeatureSpecification", name: "WiFi gratis", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Parking gratis", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Aire acondicionado", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Calefacción", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Jardín", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Terraza", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Cocina compartida", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Baño privado", value: true },
+              ],
+              containsPlace: [
+                {
+                  "@type": "HotelRoom",
+                  name: "Habitación Doble Grande",
+                  description: "Habitación de 20 m² con baño privado, aire acondicionado y TV.",
+                  occupancy: { "@type": "QuantitativeValue", maxValue: 2 },
+                },
+                {
+                  "@type": "HotelRoom",
+                  name: "Habitación Doble con balcón",
+                  description: "Habitación de 20 m² con balcón privado y vistas a la sierra.",
+                  occupancy: { "@type": "QuantitativeValue", maxValue: 2 },
+                },
+                {
+                  "@type": "HotelRoom",
+                  name: "Habitación Doble con vistas",
+                  description: "Habitación de 20 m² con vistas al pueblo y al entorno natural.",
+                  occupancy: { "@type": "QuantitativeValue", maxValue: 2 },
+                },
+              ],
+            },
+            {
+              "@type": "BreadcrumbList",
+              "@id": "https://casa-rural-la-plata.lovable.app/#breadcrumb",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Inicio",
+                  item: "https://casa-rural-la-plata.lovable.app/",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Casa rural en Aljucén (Badajoz)",
+                  item: "https://casa-rural-la-plata.lovable.app/#casa",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: "Habitaciones",
+                  item: "https://casa-rural-la-plata.lovable.app/#habitaciones",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 4,
+                  name: "Entorno: Cornalvo, Mérida y Vía de la Plata",
+                  item: "https://casa-rural-la-plata.lovable.app/#entorno",
+                },
+              ],
+            },
           ],
         }),
       },
@@ -243,9 +340,9 @@ const rooms = [
     ],
     image: img367530038,
     photos: [
-      { src: img367530082, alt: ""},
-      { src: img367530078, alt: "" },
-      { src: img367530060, alt: ""},
+      { src: img367530082, alt: "Habitación Doble Grande de la casa rural en Aljucén con dos camas individuales" },
+      { src: img367530078, alt: "Baño privado de la Habitación Doble Grande" },
+      { src: img367530060, alt: "Zona de descanso y mobiliario rústico de la Habitación Doble Grande" },
     ],
   },
   {
@@ -262,9 +359,9 @@ const rooms = [
     ],
     image: img367520354,
     photos: [
-      { src: img367520365, alt: ""},
-      { src: img367520139, alt: "" },
-      { src: img367520394, alt: "" },
+      { src: img367520365, alt: "Habitación Doble con balcón y vistas al pueblo de Aljucén" },
+      { src: img367520139, alt: "Balcón privado con vistas a la sierra extremeña" },
+      { src: img367520394, alt: "Baño privado de la Habitación Doble con balcón" },
     ],
   },
   {
@@ -281,9 +378,9 @@ const rooms = [
     ],
     image: img367528681,
     photos: [
-      { src: img367528667, alt: ""},
-      { src: img357572294, alt: "" },
-      { src: img367528614, alt: "" },
+      { src: img367528667, alt: "Habitación Doble con vistas a la montaña extremeña" },
+      { src: img357572294, alt: "Detalle de la habitación con ropa de cama y decoración rústica" },
+      { src: img367528614, alt: "Baño privado de la Habitación Doble con vistas" },
     ],
   },
 ];
@@ -450,11 +547,12 @@ function Index() {
             <div className="order-2 lg:order-1">
               <img
                 src={img367534281}
-                alt="Detalle decorativo rústico de la casa"
+                alt="Detalle decorativo rústico de Casa Rural La Plata, alojamiento rural en Aljucén (Extremadura)"
                 className="rounded-2xl shadow-xl"
                 width={768}
                 height={1024}
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="order-1 lg:order-2">
@@ -465,13 +563,14 @@ function Index() {
                 Casa rural y alojamiento con encanto en Aljucén
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Casa Rural La Plata te ofrece una experiencia auténtica en el corazón de Extremadura. Nuestra
-                casa combina una experiencia rústica y alejada de la vida urbana con todas las comodidades modernas para
-                que tu estancia sea inolvidable.
+                Casa Rural La Plata te ofrece una escapada rural auténtica en el corazón de Extremadura. Nuestra
+                casa combina el encanto rústico del campo extremeño con todas las comodidades modernas para que tu
+                estancia sea inolvidable, tanto si viajas en familia, con amigos o con mascotas.
               </p>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                Ubicada en el centro del pueblo de Aljucén, a solo 15 minutos de Mérida, es el punto de partida
-                ideal para descubrir la naturaleza y la gastronomía de la zona.
+                Ubicada en el centro del pueblo de Aljucén (provincia de Badajoz), a solo 15 minutos de Mérida y
+                junto al Parque Natural de Cornalvo, es el punto de partida ideal para hacer turismo rural en
+                Extremadura y descubrir la naturaleza, las rutas de senderismo y la gastronomía de la zona.
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -506,7 +605,8 @@ function Index() {
               Habitaciones de nuestra casa rural en Aljucén
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              Tres opciones diseñadas para tu descanso, todas con baño privado y las comodidades que necesitas.
+              Tres habitaciones dobles diseñadas para tu descanso, todas con baño privado y las comodidades que
+              necesitas para una estancia tranquila cerca de Mérida.
             </p>
           </div>
 
@@ -521,11 +621,12 @@ function Index() {
                 >
                   <img
                     src={room.image}
-                    alt={room.title}
+                    alt={`${room.title} de Casa Rural La Plata en Aljucén (Badajoz)`}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     width={1024}
                     height={768}
                     loading="lazy"
+                    decoding="async"
                   />
                   <span className="absolute inset-0 flex items-center justify-center bg-foreground/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                     <span className="flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-semibold text-foreground">
@@ -637,10 +738,11 @@ function Index() {
           <div className="mb-12 text-center">
             <span className="text-sm font-semibold uppercase tracking-wider text-primary">Comodidades</span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
-              Servicios e instalaciones
+              Servicios e instalaciones de la casa rural
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              Todo lo que necesitas para una estancia cómoda y relajante.
+              Todo lo que necesitas para una estancia cómoda y relajante: cocina compartida, jardín, terraza,
+              WiFi y parking gratis.
             </p>
           </div>
 
@@ -715,12 +817,13 @@ function Index() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-sm font-semibold uppercase tracking-wider text-primary">Descubre</span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
-              Aljucén y su entorno
+              Aljucén, Cornalvo y el entorno natural de Extremadura
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Aljucén es un tranquilo pueblo extremeño, perfecto para explorar la zona. Su ubicación
-              estratégica te permite disfrutar tanto del patrimonio histórico como de la naturaleza
-              extremeña.
+              Aljucén es un tranquilo pueblo con encanto de la provincia de Badajoz, perfecto para desconectar y
+              explorar la zona. Su ubicación estratégica en la Vía de la Plata te permite disfrutar del
+              patrimonio histórico de Mérida y de zonas naturales como el Parque Natural de Cornalvo, con rutas
+              de senderismo, dehesa y observación de aves.
             </p>
           </div>
 
@@ -769,11 +872,12 @@ function Index() {
           <div className="mt-12 grid items-center gap-10 lg:grid-cols-2">
             <img
               src={imgPaisajeExtremadura}
-              alt="Iglesia de Aljucén y su entorno"
+              alt="Iglesia de Aljucén y su entorno natural, cerca del Parque Natural de Cornalvo"
               className="rounded-2xl shadow-xl"
               width={1280}
               height={720}
               loading="lazy"
+              decoding="async"
             />
             <div>
               <h3 className="font-serif text-2xl font-bold text-foreground">¿Dónde estamos?</h3>
