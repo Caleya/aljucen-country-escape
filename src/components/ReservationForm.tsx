@@ -11,7 +11,6 @@ export const CONTACT_EMAIL = "casarurallaplata@gmail.com";
 
 const MAX = 60;
 const req = (msg: string) => z.string().trim().min(1, msg).max(MAX, `Máximo ${MAX} caracteres`);
-const opt = z.string().trim().max(MAX, `Máximo ${MAX} caracteres`).optional().or(z.literal(""));
 const num = (msg: string) =>
   z
     .string()
@@ -19,66 +18,59 @@ const num = (msg: string) =>
     .min(1, msg)
     .max(3)
     .refine((value) => /^\d+$/.test(value) && Number(value) > 0, "Introduce un número mayor que 0");
-const numOpt = z
-  .string()
-  .trim()
-  .max(3)
-  .refine((value) => value === "" || (/^\d+$/.test(value) && Number(value) > 0), "Introduce un número mayor que 0")
-  .optional()
-  .or(z.literal(""));
 
 const schema = z.object({
   // Datos de la reserva
-  referencia: opt,
-  fechaContrato: opt,
+  referencia: req("Indica la referencia"),
+  fechaContrato: z.string().min(1, "Indica la fecha del contrato"),
   entrada: z.string().min(1, "Indica la fecha de entrada"),
   salida: z.string().min(1, "Indica la fecha de salida"),
   personas: num("Indica el nº de personas"),
-  habitaciones: numOpt,
+  habitaciones: num("Indica el nº de habitaciones"),
   // Pago
-  tipoPago: opt,
-  medioPago: opt,
-  titularPago: opt,
-  fechaPago: opt,
+  tipoPago: req("Indica el tipo de pago"),
+  medioPago: req("Indica el medio de pago"),
+  titularPago: req("Indica el titular del pago"),
+  fechaPago: z.string().min(1, "Indica la fecha de pago"),
   // Titular
   tNombre: req("Indica el nombre"),
   tApellido1: req("Indica el primer apellido"),
-  tApellido2: opt,
-  tNacimiento: opt,
-  tNacionalidad: opt,
-  tSexo: opt,
-  tTipoDoc: opt,
+  tApellido2: req("Indica el segundo apellido"),
+  tNacimiento: z.string().min(1, "Indica la fecha de nacimiento"),
+  tNacionalidad: req("Indica la nacionalidad"),
+  tSexo: req("Indica el sexo"),
+  tTipoDoc: req("Indica el tipo de documento"),
   tDocumento: req("Indica el documento"),
-  tSoporteDoc: opt,
+  tSoporteDoc: req("Indica el soporte del documento"),
   tTelefono: req("Indica un teléfono"),
-  tTelefono2: opt,
+  tTelefono2: req("Indica un teléfono adicional"),
   tEmail: z.string().trim().email("Email no válido").max(80, "Máximo 80 caracteres"),
-  tDireccion: opt,
-  tDireccion2: opt,
-  tPais: opt,
-  tProvincia: opt,
-  tMunicipio: opt,
-  tCodigoPostal: opt,
+  tDireccion: req("Indica la dirección"),
+  tDireccion2: req("Indica la dirección adicional"),
+  tPais: req("Indica el país"),
+  tProvincia: req("Indica la provincia"),
+  tMunicipio: req("Indica el municipio"),
+  tCodigoPostal: req("Indica el código postal"),
   // Viajero
-  vNombre: opt,
-  vApellido1: opt,
-  vApellido2: opt,
-  vNacimiento: opt,
-  vNacionalidad: opt,
-  vSexo: opt,
-  vTipoDoc: opt,
-  vDocumento: opt,
-  vSoporteDoc: opt,
-  vTelefono: opt,
-  vTelefono2: opt,
-  vEmail: z.string().trim().max(80, "Máximo 80 caracteres").optional().or(z.literal("")),
-  vParentesco: opt,
-  vDireccion: opt,
-  vDireccion2: opt,
-  vPais: opt,
-  vProvincia: opt,
-  vMunicipio: opt,
-  vCodigoPostal: opt,
+  vNombre: req("Indica el nombre"),
+  vApellido1: req("Indica el primer apellido"),
+  vApellido2: req("Indica el segundo apellido"),
+  vNacimiento: z.string().min(1, "Indica la fecha de nacimiento"),
+  vNacionalidad: req("Indica la nacionalidad"),
+  vSexo: req("Indica el sexo"),
+  vTipoDoc: req("Indica el tipo de documento"),
+  vDocumento: req("Indica el documento"),
+  vSoporteDoc: req("Indica el soporte del documento"),
+  vTelefono: req("Indica un teléfono"),
+  vTelefono2: req("Indica un teléfono adicional"),
+  vEmail: z.string().trim().email("Email no válido").max(80, "Máximo 80 caracteres"),
+  vParentesco: req("Indica el parentesco"),
+  vDireccion: req("Indica la dirección"),
+  vDireccion2: req("Indica la dirección adicional"),
+  vPais: req("Indica el país"),
+  vProvincia: req("Indica la provincia"),
+  vMunicipio: req("Indica el municipio"),
+  vCodigoPostal: req("Indica el código postal"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -152,10 +144,10 @@ async function buildPdf(v: FormValues) {
 
   const heading = (text: string) => {
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
+    doc.setFontSize(9);
     doc.setTextColor(20);
     doc.text(text, left, y);
-    y += 14;
+    y += 12;
   };
 
   const table = (rows: Cell[][]) => {
@@ -182,8 +174,8 @@ async function buildPdf(v: FormValues) {
         });
         return { ...cell, cellWidth, lines };
       });
-      const valueHeight = Math.max(14, ...prepared.map((cell) => Math.min(2, Math.max(1, cell.lines.length)) * 9 + 5));
-      const rowHeight = 12 + valueHeight;
+      const valueHeight = Math.max(11, ...prepared.map((cell) => Math.min(2, Math.max(1, cell.lines.length)) * 7.5 + 3));
+      const rowHeight = 10 + valueHeight;
       if (y + rowHeight > BOTTOM) return;
       let x = left;
       doc.setDrawColor(30);
@@ -191,26 +183,26 @@ async function buildPdf(v: FormValues) {
       prepared.forEach((cell) => {
         const w = cell.cellWidth;
         doc.rect(x, y, w, rowHeight);
-        doc.line(x, y + 12, x + w, y + 12);
+        doc.line(x, y + 10, x + w, y + 10);
         doc.setFont("helvetica", "normal");
-        doc.setFontSize(7);
+        doc.setFontSize(6.5);
         doc.setTextColor(20);
-        doc.text(cell.label, x + 4, y + 8.5);
+        doc.text(cell.label, x + 3, y + 7);
         doc.setFont("helvetica", "bold");
-        doc.setFontSize(8.5);
-        doc.text(cell.lines.length ? cell.lines.slice(0, 2) : [""], x + 4, y + 21, { lineHeightFactor: 1.1 });
+        doc.setFontSize(8);
+        doc.text(cell.lines.length ? cell.lines.slice(0, 2) : [""], x + 3, y + 17.5, { lineHeightFactor: 1.05 });
         x += w;
       });
-      y += rowHeight + 3;
+      y += rowHeight + 2;
     });
-    y += 5;
+    y += 4;
   };
 
   const sello = await loadSello();
   if (sello) {
     try {
-      doc.addImage(sello, "JPEG", right - 68, 26, 62, 82);
-      y = 116;
+      doc.addImage(sello, "JPEG", right - 62, 24, 56, 74);
+      y = 106;
     } catch {
       /* sello opcional */
     }
