@@ -340,9 +340,9 @@ const rooms = [
     ],
     image: img367530038,
     photos: [
-      { src: img367530082, alt: ""},
-      { src: img367530078, alt: "" },
-      { src: img367530060, alt: ""},
+      { src: img367530082, alt: "Habitación Doble Grande de la casa rural en Aljucén con dos camas individuales" },
+      { src: img367530078, alt: "Baño privado de la Habitación Doble Grande" },
+      { src: img367530060, alt: "Zona de descanso y mobiliario rústico de la Habitación Doble Grande" },
     ],
   },
   {
@@ -359,9 +359,9 @@ const rooms = [
     ],
     image: img367520354,
     photos: [
-      { src: img367520365, alt: ""},
-      { src: img367520139, alt: "" },
-      { src: img367520394, alt: "" },
+      { src: img367520365, alt: "Habitación Doble con balcón y vistas al pueblo de Aljucén" },
+      { src: img367520139, alt: "Balcón privado con vistas a la sierra extremeña" },
+      { src: img367520394, alt: "Baño privado de la Habitación Doble con balcón" },
     ],
   },
   {
@@ -378,9 +378,9 @@ const rooms = [
     ],
     image: img367528681,
     photos: [
-      { src: img367528667, alt: ""},
-      { src: img357572294, alt: "" },
-      { src: img367528614, alt: "" },
+      { src: img367528667, alt: "Habitación Doble con vistas a la montaña extremeña" },
+      { src: img357572294, alt: "Detalle de la habitación con ropa de cama y decoración rústica" },
+      { src: img367528614, alt: "Baño privado de la Habitación Doble con vistas" },
     ],
   },
 ];
