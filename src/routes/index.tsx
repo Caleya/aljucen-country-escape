@@ -563,13 +563,14 @@ function Index() {
                 Casa rural y alojamiento con encanto en Aljucén
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Casa Rural La Plata te ofrece una experiencia auténtica en el corazón de Extremadura. Nuestra
-                casa combina una experiencia rústica y alejada de la vida urbana con todas las comodidades modernas para
-                que tu estancia sea inolvidable.
+                Casa Rural La Plata te ofrece una escapada rural auténtica en el corazón de Extremadura. Nuestra
+                casa combina el encanto rústico del campo extremeño con todas las comodidades modernas para que tu
+                estancia sea inolvidable, tanto si viajas en familia, con amigos o con mascotas.
               </p>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                Ubicada en el centro del pueblo de Aljucén, a solo 15 minutos de Mérida, es el punto de partida
-                ideal para descubrir la naturaleza y la gastronomía de la zona.
+                Ubicada en el centro del pueblo de Aljucén (provincia de Badajoz), a solo 15 minutos de Mérida y
+                junto al Parque Natural de Cornalvo, es el punto de partida ideal para hacer turismo rural en
+                Extremadura y descubrir la naturaleza, las rutas de senderismo y la gastronomía de la zona.
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -604,7 +605,8 @@ function Index() {
               Habitaciones de nuestra casa rural en Aljucén
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              Tres opciones diseñadas para tu descanso, todas con baño privado y las comodidades que necesitas.
+              Tres habitaciones dobles diseñadas para tu descanso, todas con baño privado y las comodidades que
+              necesitas para una estancia tranquila cerca de Mérida.
             </p>
           </div>
 
@@ -736,10 +738,11 @@ function Index() {
           <div className="mb-12 text-center">
             <span className="text-sm font-semibold uppercase tracking-wider text-primary">Comodidades</span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
-              Servicios e instalaciones
+              Servicios e instalaciones de la casa rural
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              Todo lo que necesitas para una estancia cómoda y relajante.
+              Todo lo que necesitas para una estancia cómoda y relajante: cocina compartida, jardín, terraza,
+              WiFi y parking gratis.
             </p>
           </div>
 
@@ -814,12 +817,13 @@ function Index() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-sm font-semibold uppercase tracking-wider text-primary">Descubre</span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
-              Aljucén y su entorno
+              Aljucén, Cornalvo y el entorno natural de Extremadura
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Aljucén es un tranquilo pueblo extremeño, perfecto para explorar la zona. Su ubicación
-              estratégica te permite disfrutar tanto del patrimonio histórico como de la naturaleza
-              extremeña.
+              Aljucén es un tranquilo pueblo con encanto de la provincia de Badajoz, perfecto para desconectar y
+              explorar la zona. Su ubicación estratégica en la Vía de la Plata te permite disfrutar del
+              patrimonio histórico de Mérida y de zonas naturales como el Parque Natural de Cornalvo, con rutas
+              de senderismo, dehesa y observación de aves.
             </p>
           </div>
 
