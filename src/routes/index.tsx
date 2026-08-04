@@ -547,11 +547,12 @@ function Index() {
             <div className="order-2 lg:order-1">
               <img
                 src={img367534281}
-                alt="Detalle decorativo rústico de la casa"
+                alt="Detalle decorativo rústico de Casa Rural La Plata, alojamiento rural en Aljucén (Extremadura)"
                 className="rounded-2xl shadow-xl"
                 width={768}
                 height={1024}
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="order-1 lg:order-2">
@@ -618,11 +619,12 @@ function Index() {
                 >
                   <img
                     src={room.image}
-                    alt={room.title}
+                    alt={`${room.title} de Casa Rural La Plata en Aljucén (Badajoz)`}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     width={1024}
                     height={768}
                     loading="lazy"
+                    decoding="async"
                   />
                   <span className="absolute inset-0 flex items-center justify-center bg-foreground/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                     <span className="flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-semibold text-foreground">
@@ -866,11 +868,12 @@ function Index() {
           <div className="mt-12 grid items-center gap-10 lg:grid-cols-2">
             <img
               src={imgPaisajeExtremadura}
-              alt="Iglesia de Aljucén y su entorno"
+              alt="Iglesia de Aljucén y su entorno natural, cerca del Parque Natural de Cornalvo"
               className="rounded-2xl shadow-xl"
               width={1280}
               height={720}
               loading="lazy"
+              decoding="async"
             />
             <div>
               <h3 className="font-serif text-2xl font-bold text-foreground">¿Dónde estamos?</h3>
